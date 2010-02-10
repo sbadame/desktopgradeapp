@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="gradeapp" default="build" basedir=".">
 
-       <!-- Holds a list of all of the 'main' project's dependencies -->
+     <!-- Holds a list of all of the 'main' project's dependencies -->
      <path id="lib.path">
        <fileset dir=".">
          <include name="lib/*.jar" />
@@ -9,41 +9,57 @@
      </path>
 
      <!-- build the program -->
-     <target name="build">
-           <mkdir dir="bin" />
-           <mkdir dir="bin/main" />
-        <javac srcdir="src/main" destdir="bin/main" classpathref="lib.path" debug="on" source="6" />
-     </target>
-
-
-    <!--- target to run the program -->
-    <target name="run" depends="build">
-        <java fork="true" classname="GradeApp" >
-            <classpath>
-                <path refid="lib.path"/>
-                <path location="bin/main"/>
-            </classpath>
-        </java>
-    </target>
-
-
-    <!-- target to test the program -->
-    <target name="test">
-        <junit printsummary="on" showoutput="off" haltonfailure="yes" fork="yes"
-            forkmode="perTest">
-            <classpath>
-                 <path refid="lib.path"/>
-                 <path location="bin/main"/>
-                 <path location="bin/test" />
-            </classpath>
-        </junit>
-    </target>
+     <target name="build" depends="compile,test" />
 
     <!-- Basic simple clean target -->
     <target name="clean">
         <delete dir="bin"/>
     </target>
 
+    <!-- make our binaries -->
+     <target name="compile">
+           <mkdir dir="bin" />
+           <mkdir dir="bin/main" />
+           <mkdir dir="bin/test" />
+	   <javac srcdir="src/main" destdir="bin/main" classpathref="lib.path" debug="on" source="6" />
+	   <javac srcdir="src/test" destdir="bin/test" classpathref="lib.path" debug="on" source="6" />
+     </target>
+
+    <!-- run junit to test the program -->
+    <target name="test" >
+        <junit>
+            <classpath>
+                 <path refid="lib.path"/>
+                 <path location="bin/main"/>
+                 <path location="bin/test" />
+            </classpath>
+	    <formatter type="brief" usefile="false" />
+	    <batchtest >
+	      <fileset dir="bin/test" includes="**/*.class" />
+	    </batchtest>
+        </junit>
+    </target>
+
+    <!--- target to run the program -->
+    <target name="run" depends="build">
+        <java fork="true" classname="gradeapp.GradeApp" >
+            <classpath>
+                <path refid="lib.path"/>
+                <path location="bin/main"/>
+            </classpath>
+        </java>
+    </target>
+ 
+    <!-- Example program that explores some HSSF excel magic
+     You probably want to read the source first to see what it does -->
+    <target name="example-excel" depends="build">
+      <java fork="true" classname="example.ExcelExample" >
+            <classpath>
+                <path refid="lib.path"/>
+                <path location="bin/main"/>
+            </classpath>
+        </java>
+    </target>
 
     <!-- create documention from the source code -->
     <target name="doc">
