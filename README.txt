@@ -14,3 +14,4 @@ You now have a project.
 Don't like either of these IDEs? No problem, the build system used is ANT so even TextPad or VIM can do work.
 
 Chris Eichel waz here.
+Sandro doing work here
