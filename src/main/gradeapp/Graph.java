@@ -1,6 +1,7 @@
 package gradeapp;
 
 import java.io.File;
+import java.util.Vector;
 
 /**
  * A singleton class that holdes the graph information from the loaded
@@ -20,6 +21,7 @@ public class Graph {
     }
 
     public static Graph getGraph(){
+        Graph.createGraph(null);
         return graph;
     }
 
@@ -28,12 +30,23 @@ public class Graph {
     //Default settings
     private float goodgrade = 80; 
     private float noise = 0.7f;
+    private Vector<Vector<Character>> grades = new Vector<Vector<Character>>();
+    private Vector<Character> answerkey = new Vector<Character>();
+    private Object tree;
+    private GRender renderer;
 
     /**
      * Parses the excelFile, gathers the data and
      * @param excelFile the excel file to be pased
      */
     private Graph(File excelFile){
+        ExcelReader excelReader = new ExcelReader(excelFile);
+        grades = excelReader.getGrades();
+        answerkey = excelReader.getAnswerKey();
+        BootheAlgo();
+    }
+
+    private void BootheAlgo(){
 
     }
 
@@ -49,6 +62,7 @@ public class Graph {
      */
     public void setGoodgrade(float goodgrade) {
         this.goodgrade = goodgrade;
+        BootheAlgo();
     }
 
     /**
@@ -63,9 +77,66 @@ public class Graph {
      */
     public void setNoise(float noise) {
         this.noise = noise;
+        BootheAlgo();
     }
 
     public static void main(String[] args) {
         System.out.println("hi");
+    }
+
+    /**
+     * @return the grades
+     */
+    public Vector<Vector<Character>> getGrades() {
+        return grades;
+    }
+
+    /**
+     * @param grades the grades to set
+     */
+    public void setGrades(Vector<Vector<Character>> grades) {
+        this.grades = grades;
+    }
+
+    /**
+     * @return the answerkey
+     */
+    public Vector<Character> getAnswerkey() {
+        return answerkey;
+    }
+
+    /**
+     * @param answerkey the answerkey to set
+     */
+    public void setAnswerkey(Vector<Character> answerkey) {
+        this.answerkey = answerkey;
+    }
+
+    /**
+     * @return the tree
+     */
+    public Object getTree() {
+        return tree;
+    }
+
+    /**
+     * @param tree the tree to set
+     */
+    public void setTree(Object tree) {
+        this.tree = tree;
+    }
+
+    /**
+     * @return the renderer
+     */
+    public GRender getRenderer() {
+        return renderer;
+    }
+
+    /**
+     * @param renderer the renderer to set
+     */
+    public void setRenderer(GRender renderer) {
+        this.renderer = renderer;
     }
 }
