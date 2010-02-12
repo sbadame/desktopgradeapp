@@ -12,6 +12,10 @@
 package gradeapp;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.border.TitledBorder;
 
@@ -44,6 +48,7 @@ public class GradeApp extends javax.swing.JFrame {
     noiseSlider = new javax.swing.JSlider();
     graphPanel = new javax.swing.JPanel();
     helpButton = new javax.swing.JButton();
+    saveButton = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +134,14 @@ public class GradeApp extends javax.swing.JFrame {
       }
     });
 
+    saveButton.setText("Save");
+    saveButton.setEnabled(false);
+    saveButton.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        saveButtonActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -145,7 +158,9 @@ public class GradeApp extends javax.swing.JFrame {
             .addComponent(emailButton)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(printButton)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 429, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(saveButton)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 361, Short.MAX_VALUE)
             .addComponent(helpButton)))
         .addContainerGap())
     );
@@ -157,7 +172,8 @@ public class GradeApp extends javax.swing.JFrame {
           .addComponent(loadButton)
           .addComponent(emailButton)
           .addComponent(printButton)
-          .addComponent(helpButton))
+          .addComponent(helpButton)
+          .addComponent(saveButton))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(goodGradePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -173,8 +189,17 @@ public class GradeApp extends javax.swing.JFrame {
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         JFileChooser fc = new JFileChooser();
         File input = fc.getSelectedFile();
-        Graph.createGraph(input);
+        try {
+            Graph.createGraph(input);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GradeApp.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GradeApp.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (GraphFormatException ex) {
+            Logger.getLogger(GradeApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
         emailButton.setEnabled(true);
+        saveButton.setEnabled(true);
         printButton.setEnabled(true);
         noiseSlider.setEnabled(true);
         gradeSlider.setEnabled(true);// TODO add your handling code here:
@@ -199,6 +224,10 @@ public class GradeApp extends javax.swing.JFrame {
         noiseSliderPanel.repaint();
     }//GEN-LAST:event_noiseSliderStateChanged
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveButtonActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -220,6 +249,7 @@ public class GradeApp extends javax.swing.JFrame {
   private javax.swing.JSlider noiseSlider;
   private javax.swing.JPanel noiseSliderPanel;
   private javax.swing.JButton printButton;
+  private javax.swing.JButton saveButton;
   // End of variables declaration//GEN-END:variables
 
 }

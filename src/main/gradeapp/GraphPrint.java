@@ -9,6 +9,6 @@ package gradeapp;
  *
  * @author sandro
  */
-public class Print {
+public class GraphPrint {
 public static void print(){}
 }
