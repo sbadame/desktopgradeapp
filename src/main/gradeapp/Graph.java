@@ -1,6 +1,8 @@
 package gradeapp;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Vector;
 
 /**
@@ -14,14 +16,14 @@ public class Graph {
      */
     private static Graph graph;
 
-    public static Graph createGraph(File excelFile){
+    public static Graph createGraph(File excelFile) throws FileNotFoundException, IOException, GraphFormatException {
         if (graph == null)
             graph = new Graph(excelFile);
         return graph;
     }
 
-    public static Graph getGraph(){
-        Graph.createGraph(null);
+    public static Graph getGraph() {
+        
         return graph;
     }
 
@@ -39,7 +41,7 @@ public class Graph {
      * Parses the excelFile, gathers the data and
      * @param excelFile the excel file to be pased
      */
-    private Graph(File excelFile){
+    private Graph(File excelFile) throws FileNotFoundException, IOException, GraphFormatException {
         ExcelReader excelReader = new ExcelReader(excelFile);
         grades = excelReader.getGrades();
         answerkey = excelReader.getAnswerKey();
