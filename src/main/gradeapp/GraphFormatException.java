@@ -9,6 +9,6 @@ package gradeapp;
  *
  * @author sandro
  */
-public class Print {
-public static void print(){}
+class GraphFormatException extends Exception {
+
 }

@@ -9,8 +9,6 @@ package gradeapp;
  *
  * @author sandro
  */
-// Ufa
-public class EmailReader {
-public static void sentEmail(){}
-
+public class GraphPrint {
+public static void print(){}
 }
