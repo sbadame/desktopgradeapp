@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * GradeApp.java
  *
  * Created on Feb 9, 2010, 1:49:26 PM
@@ -22,7 +17,6 @@ import javax.swing.border.TitledBorder;
 
 /**
  *
- * @author Sandro Badame <a href="mailto:s.badame@gmail.com">s.badame&amp;gmail.com</a>
  */
 public class GradeApp extends javax.swing.JFrame {
 

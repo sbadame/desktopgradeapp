@@ -13,6 +13,10 @@ You now have a project.
 
 Don't like either of these IDEs? No problem, the build system used is ANT so even TextPad or VIM can do work.
 
+Once you have the code you can run "ant jar" to build a version of the binaries ready for distribution. The executable jar will be found
+in "dist/GradeApp.jar"
+
+
 Chris Eichel waz here.
 Sandro doing work here
 Andres trying to push

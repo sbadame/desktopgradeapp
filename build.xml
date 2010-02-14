@@ -8,8 +8,20 @@
        </fileset>
      </path>
 
-     <!-- build the program -->
-     <target name="build" depends="compile,test" />
+    <!-- build the program -->
+    <target name="build" depends="compile,test" />
+
+    <!-- Create Jar Files -->
+    <target name="jar" depends="compile" description="Builds the jar'd version of GradeApp">
+	<mkdir dir="dist" />
+	<jar jarfile="dist/GradeApp.jar" index="true">
+	    <fileset dir="bin/main"/>
+	    <manifest>
+		<attribute name="Implementation-Vendor" value="Software Engineering 'Desktop Application' Group"/>
+		<attribute name="Main-Class" value="gradeapp.GradeApp" />
+	    </manifest>
+	</jar>
+    </target>
 
     <!-- Basic simple clean target -->
     <target name="clean">
