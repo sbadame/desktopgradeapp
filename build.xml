@@ -78,4 +78,16 @@
         <javadoc packagenames="gradeapp.*" sourcepath="src/main" destdir="doc" />
     </target>
 
+    <!-- Build exe for Windows, Lifted from: http://launch4j.sourceforge.net/docs.html -->
+    <taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="lib/launch4j/launch4j.jar:lib/launch4j/xstream.jar"/>
+    <target name="build-windows" depends="jar">
+	<mkdir dir="dist/windows"/>
+	<launch4j configFile="lib/launch4j/gradeappconfig.xml" />
+    </target>
+
+    <!-- Use this target to bring up the GUI used to the edit the gradeappconfig.xml -->
+    <target name="config-windows">
+	<java jar="lib/launch4j/launch4j.jar" fork="true" />
+    </target>	
+
 </project>
