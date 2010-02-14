@@ -11,6 +11,10 @@ import java.util.Vector;
  */
 public class Graph {
 
+    //Default Arguments
+    public static final float DEFAULT_GOODGRADE = 80;
+    public static final float DEFAULT_NOISE = 0.7f;
+
     /**
      * The singleton instance of the graph
      */
@@ -23,7 +27,6 @@ public class Graph {
     }
 
     public static Graph getGraph() {
-        
         return graph;
     }
 

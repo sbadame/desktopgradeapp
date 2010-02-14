@@ -36,7 +36,7 @@
                       <Component id="printButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="saveButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="361" max="32767" attributes="0"/>
+                      <EmptySpace pref="487" max="32767" attributes="0"/>
                       <Component id="helpButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -92,7 +92,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="&lt;User Code&gt;">
-              <Connection PropertyName="titleX" code="&quot;Good Grade - &quot; + Graph.getGraph().getGoodgrade()" type="code"/>
+              <Connection PropertyName="titleX" code="&quot;Good Grade - &quot; + Graph.DEFAULT_GOODGRADE" type="code"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -121,7 +121,7 @@
           <Properties>
             <Property name="paintLabels" type="boolean" value="true"/>
             <Property name="value" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="(int)(Graph.getGraph().getGoodgrade())" type="code"/>
+              <Connection code="(int)(Graph.DEFAULT_GOODGRADE)" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -136,7 +136,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder title="&lt;User Code&gt;">
-              <Connection PropertyName="titleX" code="&quot;Noise - &quot; + Graph.getGraph().getNoise()" type="code"/>
+              <Connection PropertyName="titleX" code="&quot;Noise - &quot; + Graph.DEFAULT_NOISE" type="code"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -164,7 +164,7 @@
         <Component class="javax.swing.JSlider" name="noiseSlider">
           <Properties>
             <Property name="value" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="(int)(Graph.getGraph().getNoise()*100)" type="code"/>
+              <Connection code="(int)(Graph.DEFAULT_NOISE*100)" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
@@ -179,7 +179,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="733" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="735" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
