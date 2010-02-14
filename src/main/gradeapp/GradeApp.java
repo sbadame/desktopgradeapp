@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.border.TitledBorder;
 
 /**
@@ -206,7 +207,7 @@ public class GradeApp extends javax.swing.JFrame {
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        // TODO add your handling code here:
+        HelpShower.showHelp();
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void gradeSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_gradeSliderStateChanged
@@ -234,7 +235,12 @@ public class GradeApp extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GradeApp().setVisible(true);
+                GradeApp gradeApp = new GradeApp();
+                //Center the app by setting it relative to null. This is a
+                //weird property of the "setLocationRelativeTo" method.
+                gradeApp.setLocationRelativeTo(null);
+                gradeApp.setVisible(true);
+                gradeApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
         });
     }
