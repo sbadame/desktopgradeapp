@@ -80,6 +80,9 @@
         <Property name="text" type="java.lang.String" value="Email"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="emailButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="printButton">
       <Properties>
@@ -102,7 +105,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="gradeSlider" pref="711" max="32767" attributes="0"/>
+                  <Component id="gradeSlider" pref="786" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -146,7 +149,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="noiseSlider" pref="711" max="32767" attributes="0"/>
+                  <Component id="noiseSlider" pref="786" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -179,7 +182,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="735" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="812" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

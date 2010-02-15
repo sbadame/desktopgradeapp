@@ -56,6 +56,11 @@ public class GradeApp extends javax.swing.JFrame {
 
         emailButton.setText("Email");
         emailButton.setEnabled(false);
+        emailButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailButtonActionPerformed(evt);
+            }
+        });
 
         printButton.setText("Print");
         printButton.setEnabled(false);
@@ -76,7 +81,7 @@ public class GradeApp extends javax.swing.JFrame {
         goodGradePanelLayout.setHorizontalGroup(
             goodGradePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(goodGradePanelLayout.createSequentialGroup()
-                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
+                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
                 .addContainerGap())
         );
         goodGradePanelLayout.setVerticalGroup(
@@ -101,7 +106,7 @@ public class GradeApp extends javax.swing.JFrame {
         noiseSliderPanelLayout.setHorizontalGroup(
             noiseSliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(noiseSliderPanelLayout.createSequentialGroup()
-                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
+                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
                 .addContainerGap())
         );
         noiseSliderPanelLayout.setVerticalGroup(
@@ -115,7 +120,7 @@ public class GradeApp extends javax.swing.JFrame {
         graphPanel.setLayout(graphPanelLayout);
         graphPanelLayout.setHorizontalGroup(
             graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 735, Short.MAX_VALUE)
+            .addGap(0, 812, Short.MAX_VALUE)
         );
         graphPanelLayout.setVerticalGroup(
             graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,9 +224,15 @@ public class GradeApp extends javax.swing.JFrame {
         noiseSliderPanel.repaint();
     }//GEN-LAST:event_noiseSliderStateChanged
 
+
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void emailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailButtonActionPerformed
+    EmailSender.sentEmail();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailButtonActionPerformed
 
     /**
     * @param args the command line arguments
