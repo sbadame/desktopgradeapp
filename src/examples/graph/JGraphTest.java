@@ -73,6 +73,8 @@ public class JGraphTest extends JFrame {
         jGraphTest.pack();
         jGraphTest.setLocationRelativeTo(null);
         jGraphTest.setVisible(true);
+        //adding this line below to try out the print function
+        GraphPrint.printComponent(jGraphTest);
         jGraphTest.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

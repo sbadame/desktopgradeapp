@@ -11,6 +11,7 @@ package gradeapp;
  */
 import java.awt.*;
 import javax.swing.*;
+
 import java.awt.print.*;
 public class GraphPrint implements Printable{
     
@@ -28,11 +29,13 @@ public class GraphPrint implements Printable{
         PrinterJob printJob = PrinterJob.getPrinterJob();
         printJob.setPrintable(this);
         if (printJob.printDialog())
+            
           try {
             printJob.print();
           } catch(PrinterException pe) {
             System.out.println("Error printing: " + pe);
           }
+        
       }
 
       public int print(Graphics g, PageFormat pageFormat, int pageIndex) {
