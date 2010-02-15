@@ -27,6 +27,12 @@
                     <location>src/test</location>
                     <encoding>UTF-8</encoding>
                 </source-folder>
+                <source-folder>
+                    <label>src/examples</label>
+                    <type>java</type>
+                    <location>src/examples</location>
+                    <encoding>UTF-8</encoding>
+                </source-folder>
             </folders>
             <ide-actions>
                 <action name="build">
@@ -56,6 +62,10 @@
                         <label>src/test</label>
                         <location>src/test</location>
                     </source-folder>
+                    <source-folder style="packages">
+                        <label>src/examples</label>
+                        <location>src/examples</location>
+                    </source-folder>
                     <source-file>
                         <location>build.xml</location>
                     </source-file>
@@ -80,6 +90,11 @@
                 <package-root>src/test</package-root>
                 <unit-tests/>
                 <classpath mode="compile">lib/junit-4.6.jar</classpath>
+                <source-level>1.5</source-level>
+            </compilation-unit>
+            <compilation-unit>
+                <package-root>src/examples</package-root>
+                <classpath mode="compile">lib/jgraph.jar:lib/junit-4.6.jar:lib/mail.jar:lib/poi-3.6-20091214.jar:bin/main</classpath>
                 <source-level>1.5</source-level>
             </compilation-unit>
         </java-data>

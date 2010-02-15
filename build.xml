@@ -33,8 +33,10 @@
            <mkdir dir="bin" />
            <mkdir dir="bin/main" />
            <mkdir dir="bin/test" />
+	   <mkdir dir="bin/examples" />
 	   <javac srcdir="src/main" destdir="bin/main" classpathref="lib.path" debug="on" source="6" />
 	   <javac srcdir="src/test" destdir="bin/test" classpathref="lib.path" debug="on" source="6" />
+	   <javac srcdir="src/examples" destdir="bin/examples" classpathref="lib.path" debug="on" source="6" />
      </target>
 
     <!-- run junit to test the program -->
@@ -65,19 +67,21 @@
     <!-- Example program that explores some HSSF excel magic
      You probably want to read the source first to see what it does -->
     <target name="example-excel" depends="build">
-      <java fork="true" classname="example.ExcelExample" >
+      <java fork="true" classname="excel.ExcelExample" >
             <classpath>
                 <path refid="lib.path"/>
                 <path location="bin/main"/>
+                <path location="bin/examples"/>
             </classpath>
         </java>
     </target>
 
     <target name="example-graph" depends="build">
-	<java fork="true" classname="example.graph.JGraphTest">
+	<java fork="true" classname="graph.JGraphTest">
             <classpath>
                 <path refid="lib.path"/>
                 <path location="bin/main"/>
+                <path location="bin/examples"/>
             </classpath>
 	</java>
     </target>	

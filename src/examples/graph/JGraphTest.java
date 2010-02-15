@@ -1,4 +1,4 @@
-package example.graph;
+package graph;
 
 import com.jgraph.layout.JGraphFacade;
 import com.jgraph.layout.tree.JGraphTreeLayout;
@@ -73,5 +73,6 @@ public class JGraphTest extends JFrame {
         jGraphTest.pack();
         jGraphTest.setLocationRelativeTo(null);
         jGraphTest.setVisible(true);
+        jGraphTest.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
