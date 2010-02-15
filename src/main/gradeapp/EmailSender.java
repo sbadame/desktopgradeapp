@@ -22,17 +22,17 @@ public class EmailSender {
 public static void sentEmail(){
 JOptionPane.showMessageDialog(null, "Wait A Sec ... Hacking ... Sending Email ...");
 
-  String to = "anthonydifiore333@gmail.com";
-  String from = "anthonydifiore333@gmail.com";
-  String host = "smtp.gmail.com";
+  // Change If Needed Here
+  String to = "desktopgradeapp@gmail.com";
+  String from = "bigantfbi333@optonline.net";
+  String host = "mail.optonline.net";
   String filename = "gayjava.txt";
-  String msgText1 = "Sending a file.\n";
-  String subject = "Sending a file";
+  String msgText1 = "See Attachment For Grade Graph.\nDo Not Reply To This Email.\n";
+  String subject = "Grade Graph Results";
 
   // create some properties and get the default Session
   Properties props = System.getProperties();
   props.put("mail.smtp.host", host);
-  props.put("mail.smtp.port", "465");
   Session session = Session.getInstance(props, null);
 
   try
@@ -79,7 +79,7 @@ JOptionPane.showMessageDialog(null, "Wait A Sec ... Hacking ... Sending Email ..
     ex.printStackTrace();
       }
   }
-  JOptionPane.showMessageDialog(null, "Done Hacking ... Send Email.");
+  JOptionPane.showMessageDialog(null, "Done Hacking ... Sent Email.");
 }
 
 }
