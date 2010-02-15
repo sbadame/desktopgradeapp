@@ -16,14 +16,15 @@ import javax.activation.*;
  *
  * @author sandro
  */
-// Ufa
+// Most of Code Ripped From:
+// http://www.java-tips.org/other-api-tips/javamail/how-to-send-an-email-with-a-file-attachment.html
 public class EmailSender {
 public static void sentEmail(){
 JOptionPane.showMessageDialog(null, "Wait A Sec ... Hacking ... Sending Email ...");
 
-  String to = "4nicolad@optonline.net";
-  String from = "bigantfbi333@optonline.net";
-  String host = "mail.optonline.net";
+  String to = "anthonydifiore333@gmail.com";
+  String from = "anthonydifiore333@gmail.com";
+  String host = "smtp.gmail.com";
   String filename = "gayjava.txt";
   String msgText1 = "Sending a file.\n";
   String subject = "Sending a file";
@@ -31,7 +32,7 @@ JOptionPane.showMessageDialog(null, "Wait A Sec ... Hacking ... Sending Email ..
   // create some properties and get the default Session
   Properties props = System.getProperties();
   props.put("mail.smtp.host", host);
-
+  props.put("mail.smtp.port", "465");
   Session session = Session.getInstance(props, null);
 
   try
