@@ -73,7 +73,7 @@
         <java-data xmlns="http://www.netbeans.org/ns/freeform-project-java/2">
             <compilation-unit>
                 <package-root>src/main</package-root>
-                <classpath mode="compile">lib/collections-generic-4.01.jar:lib/colt-1.2.0.jar:lib/jung-algorithms-2.0.jar:lib/jung-api-2.0.jar:lib/jung-graph-impl-2.0.jar:lib/jung-visualization-2.0.jar:lib/jung2-2_0.zip:lib/junit-4.6.jar:lib/mail.jar:lib/poi-3.6-20091214.jar</classpath>
+                <classpath mode="compile">lib/junit-4.6.jar:lib/mail.jar:lib/poi-3.6-20091214.jar:lib/jgraph.jar</classpath>
                 <source-level>1.5</source-level>
             </compilation-unit>
             <compilation-unit>
