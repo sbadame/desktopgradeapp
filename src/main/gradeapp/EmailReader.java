@@ -11,6 +11,8 @@ package gradeapp;
  */
 // Ufa
 public class EmailReader {
-public static void sentEmail(){}
+public static void sentEmail(){
+System.out.println("Work Son");
+}
 
 }

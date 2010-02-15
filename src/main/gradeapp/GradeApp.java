@@ -206,7 +206,7 @@ public class GradeApp extends javax.swing.JFrame {
 
     private void gradeSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_gradeSliderStateChanged
 
-        Graph.getGraph().setGoodgrade(gradeSlider.getValue());   // TODO add your handling code here:
+        Graph.getGraph().setGoodgrade(gradeSlider.getValue());   // TODO add your handling code hs......ere:
         String title = "Good Grade - ";
         ((TitledBorder)goodGradePanel.getBorder()).setTitle(title + gradeSlider.getValue());
         goodGradePanel.repaint();
