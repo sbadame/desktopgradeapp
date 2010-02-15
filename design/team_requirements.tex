@@ -1,0 +1,22 @@
+%Software Engineering design requirements
+\documentclass{article}
+%\addtolength{\textwidth}{0.6in}
+%\addtolength{\hoffset}{-0.3in}
+%\addtolength{\textheight}{cin}
+%\addtolength{\voffset}{-cin}
+
+\begin{document}
+\title{Software Engineering Design Requirements}
+\author{
+Sandro Badame\\
+Anthony DiFiore\\
+Christopher Eichel\\
+Andrew Esca\\
+Andres Ramirez
+}
+\date{\today}
+\maketitle
+The purpose of this software is to streamline the conversion of scantron test results into an informative  tree. Currently the process used to generate these decision trees involves using a series of terminal commands to manipulate the data found in an excel spreadsheet into the final tree. This information will, in turn allows professors to see which topics they should emphasize in class so  that students may do better in other topics.
+
+The data will be inputted from an excel spreadsheet into a desktop application. The excel data sheet is organized such that every row is the sequence of answers that a student student answered except the for the first; the first row holds the answer key. The application mines an answer key and a set of answers from each student from the spreadsheet. The user specifies a border between ``good'' and ``bad'' grades and the quality of split using two sliders. Then from the data gathered from the spreadsheet and the user, the program generates a decision tree using the algorithm provided by Dr. Boothe. The application then takes the generated tree anms.
+\end{document}
