@@ -64,6 +64,7 @@ public class GradeApp extends javax.swing.JFrame {
 
         printButton.setText("Print");
         printButton.setEnabled(false);
+        
 
         goodGradePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Good Grade - " + Graph.DEFAULT_GOODGRADE));
 
@@ -233,6 +234,7 @@ public class GradeApp extends javax.swing.JFrame {
     EmailSender.sentEmail();
         // TODO add your handling code here:
     }//GEN-LAST:event_emailButtonActionPerformed
+    
 
     /**
     * @param args the command line arguments
