@@ -22,6 +22,7 @@ public class EmailSender {
 public static void sentEmail(){
 JOptionPane.showMessageDialog(null, "Wait A Sec ... Hacking ... Sending Email ...");
 
+  // Change If Needed Here
   String to = "desktopgradeapp@gmail.com";
   String from = "bigantfbi333@optonline.net";
   String host = "mail.optonline.net";
