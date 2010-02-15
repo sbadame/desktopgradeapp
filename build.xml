@@ -73,6 +73,15 @@
         </java>
     </target>
 
+    <target name="example-graph" depends="build">
+	<java fork="true" classname="example.graph.JGraphTest">
+            <classpath>
+                <path refid="lib.path"/>
+                <path location="bin/main"/>
+            </classpath>
+	</java>
+    </target>	
+
     <!-- create documention from the source code -->
     <target name="doc">
         <javadoc packagenames="gradeapp.*" sourcepath="src/main" destdir="doc" />
