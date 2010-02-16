@@ -74,5 +74,8 @@ public class GraphTest extends JFrame {
 
     public static void main(String[] args) {
         GraphTest jGraphTest = new GraphTest();
+        jGraphTest.setVisible(true);
+
+        jGraphTest.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
