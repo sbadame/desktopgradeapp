@@ -52,6 +52,21 @@
                     <target>doc</target>
                 </action>
             </ide-actions>
+            <export>
+                <type>folder</type>
+                <location>bin/main</location>
+                <build-target>build</build-target>
+            </export>
+            <export>
+                <type>folder</type>
+                <location>bin/test</location>
+                <build-target>build</build-target>
+            </export>
+            <export>
+                <type>folder</type>
+                <location>bin/examples</location>
+                <build-target>build</build-target>
+            </export>
             <view>
                 <items>
                     <source-folder style="packages">
@@ -84,17 +99,21 @@
             <compilation-unit>
                 <package-root>src/main</package-root>
                 <classpath mode="compile">lib/junit-4.6.jar:lib/mail.jar:lib/poi-3.6-20091214.jar:lib/jgraph.jar</classpath>
+                <built-to>bin/main</built-to>
                 <source-level>1.5</source-level>
             </compilation-unit>
             <compilation-unit>
                 <package-root>src/test</package-root>
                 <unit-tests/>
                 <classpath mode="compile">lib/junit-4.6.jar</classpath>
+                <built-to>bin/test</built-to>
                 <source-level>1.5</source-level>
             </compilation-unit>
             <compilation-unit>
                 <package-root>src/examples</package-root>
                 <classpath mode="compile">lib/jgraph.jar:lib/junit-4.6.jar:lib/mail.jar:lib/poi-3.6-20091214.jar:bin/main</classpath>
+                <built-to>bin/examples</built-to>
+                <javadoc-built-to>doc</javadoc-built-to>
                 <source-level>1.5</source-level>
             </compilation-unit>
         </java-data>

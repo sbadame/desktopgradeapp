@@ -36,7 +36,12 @@
 	   <mkdir dir="bin/examples" />
 	   <javac srcdir="src/main" destdir="bin/main" classpathref="lib.path" debug="on" source="6" />
 	   <javac srcdir="src/test" destdir="bin/test" classpathref="lib.path" debug="on" source="6" />
-	   <javac srcdir="src/examples" destdir="bin/examples" classpathref="lib.path" debug="on" source="6" />
+	   <javac srcdir="src/examples" destdir="bin/examples" debug="on" source="6" >
+           <classpath>
+                <path refid="lib.path" />
+                <path location="bin/main" />
+           </classpath>
+       </javac>
      </target>
 
     <!-- run junit to test the program -->
@@ -63,6 +68,20 @@
             </classpath>
         </java>
     </target>
+    
+    <!-- The following are targets to run a bunch of the examples -->
+    <!-- to make your own, copy the following xml... -->
+    <!--
+        <target name="the name that you like" depends="build">
+          <java fork="true" classname="the class name of your example" >
+            <classpath>
+                <path refid="lib.path"/>
+                <path location="bin/main"/>
+                <path location="bin/examples"/>
+            </classpath>
+          </java>
+        </target>
+    -->
  
     <!-- Example program that explores some HSSF excel magic
      You probably want to read the source first to see what it does -->
@@ -77,14 +96,35 @@
     </target>
 
     <target name="example-graph" depends="build">
-	<java fork="true" classname="graph.JGraphTest">
-            <classpath>
-                <path refid="lib.path"/>
-                <path location="bin/main"/>
-                <path location="bin/examples"/>
-            </classpath>
-	</java>
+        <java fork="true" classname="graph.GraphTest">
+                <classpath>
+                    <path refid="lib.path"/>
+                    <path location="bin/main"/>
+                    <path location="bin/examples"/>
+                </classpath>
+        </java>
     </target>	
+
+    <target name="example-save" depends="build">
+      <java fork="true" classname="graph.GraphSaveTest" >
+        <classpath>
+            <path refid="lib.path"/>
+            <path location="bin/main"/>
+            <path location="bin/examples"/>
+        </classpath>
+      </java>
+    </target>
+
+    <target name="example-print" depends="build">
+      <java fork="true" classname="graph.GraphPrintTest" >
+        <classpath>
+            <path refid="lib.path"/>
+            <path location="bin/main"/>
+            <path location="bin/examples"/>
+        </classpath>
+      </java>
+    </target>
+
 
     <!-- create documention from the source code -->
     <target name="doc">
