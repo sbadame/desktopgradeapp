@@ -4,4 +4,4 @@ bin/*
 ./*.xls
 doc/*
 dist/*
-sampledata/*
+sampledata/
