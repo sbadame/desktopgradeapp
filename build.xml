@@ -106,7 +106,7 @@
     </target>	
 
     <target name="example-save" depends="build">
-      <java fork="true" classname="graph.GraphSaveTest" >
+      <java fork="true" classname="graph.SaveTest" >
         <classpath>
             <path refid="lib.path"/>
             <path location="bin/main"/>
@@ -116,7 +116,17 @@
     </target>
 
     <target name="example-print" depends="build">
-      <java fork="true" classname="graph.GraphPrintTest" >
+      <java fork="true" classname="graph.PrintTest" >
+        <classpath>
+            <path refid="lib.path"/>
+            <path location="bin/main"/>
+            <path location="bin/examples"/>
+        </classpath>
+      </java>
+    </target>
+
+    <target name="example-email" depends="build">
+      <java fork="true" classname="graph.EmailTest" >
         <classpath>
             <path refid="lib.path"/>
             <path location="bin/main"/>

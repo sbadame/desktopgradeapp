@@ -27,6 +27,8 @@ public class GraphSave {
             System.out.println("Error saving: " + e);
         }
     }
+
+
     public static File tempMaker(Component myComponent){
         Dimension size = myComponent.getSize();
         BufferedImage myImage = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
