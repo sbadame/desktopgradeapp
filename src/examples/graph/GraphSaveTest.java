@@ -24,4 +24,21 @@ public class GraphSaveTest {
             System.out.println("Error saving: " + e);
         }
     }
+    public static File tempMaker(Component myComponent){
+        Dimension size = myComponent.getSize();
+        BufferedImage myImage = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = myImage.createGraphics();
+        myComponent.paint(g2);
+        File temp= new File("test.png");
+        try {
+            temp = File.createTempFile("test",".png");
+            ImageIO.write(myImage, "png", temp);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        temp.deleteOnExit();
+        return temp;
+
+    }
 }

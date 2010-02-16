@@ -21,5 +21,4 @@ Chris Eichel waz here.
 Sandro doing work here
 Andres trying to push
 Sandro here again, I'm just full of fun.
-Andres again. I got the request to pull, but still can't do it. Not sure why >.<
-Andres pushing from gitbash
+Andres: I cleaned the mess I was making by testing the classes I was making with the jgraph example. print/save/tempcreator are working as far as I can test
