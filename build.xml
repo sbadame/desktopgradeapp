@@ -126,7 +126,7 @@
     </target>
 
     <target name="example-email" depends="build">
-      <java fork="true" classname="graph.EmailTest" >
+      <java fork="true" classname="email.EmailTest" >
         <classpath>
             <path refid="lib.path"/>
             <path location="bin/main"/>
