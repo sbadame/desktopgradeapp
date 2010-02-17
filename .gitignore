@@ -1,4 +1,7 @@
+*.ps
+*.patch
 bin/*
 ./*.xls
 doc/*
 dist/*
+sampledata/
