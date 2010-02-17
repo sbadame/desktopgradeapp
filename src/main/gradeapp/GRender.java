@@ -21,7 +21,6 @@ import org.jgraph.graph.GraphLayoutCache;
 
 /**
  * Holds a JGraph and does work on it
-
  * @author sandro
  */
 public class GRender extends JPanel{

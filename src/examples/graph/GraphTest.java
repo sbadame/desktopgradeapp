@@ -46,7 +46,6 @@ public class GraphTest extends JFrame {
         DefaultEdge edge = new DefaultEdge();
         edge.setSource(cells[0].getChildAt(0));
         edge.setTarget(cells[1].getChildAt(0));
-        System.out.println(edge);
         cells[2] = edge;
 
         int arrow = GraphConstants.ARROW_CLASSIC;
@@ -76,10 +75,13 @@ public class GraphTest extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    public GraphTest(String s){
+        
+    }
+
     public static void main(String[] args) {
         GraphTest jGraphTest = new GraphTest();
         jGraphTest.setVisible(true);
-
         jGraphTest.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
