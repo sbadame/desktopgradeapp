@@ -18,10 +18,13 @@ import org.jgraph.graph.*;
  */
 public class GraphTest extends JFrame {
 
+    public GraphModel model;
+    public JGraph graph;
+
     public GraphTest(){
-        GraphModel model  = new DefaultGraphModel();
+        model  = new DefaultGraphModel();
         GraphLayoutCache view = new GraphLayoutCache(model, new DefaultCellViewFactory());
-        JGraph graph = new JGraph(model, view);
+        graph = new JGraph(model, view);
 
         DefaultGraphCell[] cells = new DefaultGraphCell[3];
         //0
@@ -72,10 +75,13 @@ public class GraphTest extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    public GraphTest(String s){
+        
+    }
+
     public static void main(String[] args) {
         GraphTest jGraphTest = new GraphTest();
         jGraphTest.setVisible(true);
-
         jGraphTest.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

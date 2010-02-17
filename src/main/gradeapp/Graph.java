@@ -37,7 +37,7 @@ public class Graph {
     private float noise = 0.7f;
     private Vector<Vector<Character>> grades = new Vector<Vector<Character>>();
     private Vector<Character> answerkey = new Vector<Character>();
-    private Object tree;
+    private MinedTree tree;
     private GRender renderer;
 
     /**
@@ -120,15 +120,8 @@ public class Graph {
     /**
      * @return the tree
      */
-    public Object getTree() {
+    public MinedTree getTree() {
         return tree;
-    }
-
-    /**
-     * @param tree the tree to set
-     */
-    public void setTree(Object tree) {
-        this.tree = tree;
     }
 
     /**
