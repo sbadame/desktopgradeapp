@@ -17,9 +17,12 @@ public class MinedTree {
     int[] key;
     Collection<int[]> students;
 
-    String message;
+    public String message;
+    public MinedTree right, wrong;
 
-    MinedTree right, wrong;
+    public MinedTree(String message){
+        this.message = message;
+    }
 
     /**
      * Make a new MinedTree from the given inputs.

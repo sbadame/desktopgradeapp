@@ -18,10 +18,13 @@ import org.jgraph.graph.*;
  */
 public class GraphTest extends JFrame {
 
+    public GraphModel model;
+    public JGraph graph;
+
     public GraphTest(){
-        GraphModel model  = new DefaultGraphModel();
+        model  = new DefaultGraphModel();
         GraphLayoutCache view = new GraphLayoutCache(model, new DefaultCellViewFactory());
-        JGraph graph = new JGraph(model, view);
+        graph = new JGraph(model, view);
 
         DefaultGraphCell[] cells = new DefaultGraphCell[3];
         //0
@@ -43,6 +46,7 @@ public class GraphTest extends JFrame {
         DefaultEdge edge = new DefaultEdge();
         edge.setSource(cells[0].getChildAt(0));
         edge.setTarget(cells[1].getChildAt(0));
+        System.out.println(edge);
         cells[2] = edge;
 
         int arrow = GraphConstants.ARROW_CLASSIC;
