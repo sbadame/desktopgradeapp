@@ -248,6 +248,7 @@ public class GradeApp extends javax.swing.JFrame {
                 //weird property of the "setLocationRelativeTo" method.
                 gradeApp.setLocationRelativeTo(null);
                 gradeApp.setVisible(true);
+                gradeApp.setTitle("The Weeder");
                 gradeApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
         });

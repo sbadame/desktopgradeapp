@@ -27,7 +27,7 @@ public class EmailSender {
 public static void sentEmail(){
 
   // Change If Needed Here
-  String to = JOptionPane.showInputDialog("Input Email Address To Send File.", "anthonydifiore333@gmail.com");
+  String to = JOptionPane.showInputDialog("Input Email Address To Send File.", "desktopgradeapp@gmail.com");
   String from = "desktopgradeapp@gmail.com";
   String host = "smtp.gmail.com";
   // Sandor code nazi didnt want hardcode file name
@@ -37,6 +37,7 @@ public static void sentEmail(){
   String msgText1 = "See Attachment For Grade Graph.\nDo Not Reply To This Email.\n";
   String subject = "Grade Graph Results";
 
+  // Creates Browse Box
   JFileChooser fc = new JFileChooser();
   fc.showOpenDialog(null);
   File filename= fc.getSelectedFile();
@@ -58,7 +59,7 @@ public static void sentEmail(){
   jfrProgress.getContentPane().add(progressBar,BorderLayout.CENTER);
   progressBar.setValue(0);
   progressBar.setStringPainted(true);
-  progressBar.setString("Step 1 - Setting Hosts");
+  progressBar.setString("Step 1 - Setting Hosts.");
   
   progressBar.setSize(600, 60);
   progressBar.setVisible(true);
@@ -82,7 +83,7 @@ public static void sentEmail(){
 
   // Progress ++;
   progressBar.setValue(33);
-  progressBar.setString("Step 2 - Creating Email");
+  progressBar.setString("Step 2 - Creating Email.");
   progressBar.paintImmediately(0,0,jfrProgress.getWidth(),jfrProgress.getHeight());
 
   //Bootleg Wait cause java sucks
@@ -125,7 +126,7 @@ public static void sentEmail(){
 
       // Progress ++;
       progressBar.setValue(66);
-      progressBar.setString("Step 3 - Logging In And Sending Email");
+      progressBar.setString("Step 3 - Logging In And Sending Email.");
       progressBar.paintImmediately(0,0,jfrProgress.getWidth(),jfrProgress.getHeight());
 
       // Since Gmail is gay, needs auth, optonline didnt hence 
