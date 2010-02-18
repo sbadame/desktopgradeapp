@@ -23,7 +23,7 @@ public class EmailSender {
 public static void sentEmail(){
 
   // Change If Needed Here
-  String to = JOptionPane.showInputDialog("Input Email Address To Send File.", "desktopgradeapp@gmail.com");
+  String to = JOptionPane.showInputDialog("Input Email Address To Send File.", "anthonydifiore333@gmail.com");
   String from = "desktopgradeapp@gmail.com";
   String host = "smtp.gmail.com";
   // Sandor code nazi didnt want hardcode file name
@@ -37,6 +37,9 @@ public static void sentEmail(){
   fc.showOpenDialog(null);
   File filename= fc.getSelectedFile();
 
+  // Start Thread...OverKill Code
+  //new Thread(new GayStatusBar()).start();
+
   // create some properties and get the default Session
   Properties props = System.getProperties();
   props.put("mail.smtps.host", host);
@@ -44,6 +47,10 @@ public static void sentEmail(){
   // If 25 no work try 587 or 465
   props.put("mail.smtp.port", "25");
   Session session = Session.getInstance(props, null);
+
+  // Progress ++;
+  //progressBar.setValue(30);
+  //progressBar.setString("Step 2 - Creating Email");
 
   try
   {
@@ -77,6 +84,10 @@ public static void sentEmail(){
       // set the Date: header
       msg.setSentDate(new Date());
 
+        // Progress ++;
+        //progressBar.setValue(60);
+        //progressBar.setString("Step 3 - Logging In And Sending Email");
+
       // Since Gmail is gay, needs auth, optonline didnt hence 
       // Didnt need user/pwd
       // Connect is inhertied from serivce in gay java language
@@ -85,6 +96,9 @@ public static void sentEmail(){
       // SendMessage also not static, hence needing instance of transport to do work
       transport.connect(host, "desktopgradeapp", "ufaufaufa");
       transport.sendMessage(msg, msg.getAllRecipients());
+
+        // Progress ++;
+       //progressBar.setValue(100);
 
   }
   catch (MessagingException mex)
