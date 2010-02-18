@@ -5,6 +5,8 @@
 
 package gradeapp;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import javax.swing.JOptionPane;
 import java.util.*;
 import java.io.*;
@@ -12,6 +14,8 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -37,9 +41,37 @@ public static void sentEmail(){
   fc.showOpenDialog(null);
   File filename= fc.getSelectedFile();
 
-  // Start Thread...OverKill Code
-  //new Thread(new GayStatusBar()).start();
+  // Make New Frame For Bar
+  JFrame jfrProgress = new JFrame("Emailing File In Progress...");
+  Container contentPane = jfrProgress.getContentPane();
+  //SpringLayout layout = new SpringLayout();
+  contentPane.setLayout(null);
+  jfrProgress.setLocation(420,350);
+  jfrProgress.setSize(600,90);
+  jfrProgress.setVisible(true);
 
+  int progress = 100;
+
+  // Make Bar
+  JProgressBar progressBar = new JProgressBar(0, progress);
+
+  jfrProgress.getContentPane().add(progressBar,BorderLayout.CENTER);
+  progressBar.setValue(0);
+  progressBar.setStringPainted(true);
+  progressBar.setString("Step 1 - Setting Hosts");
+  
+  progressBar.setSize(600, 60);
+  progressBar.setVisible(true);
+  progressBar.setValue(0);
+  progressBar.setStringPainted(true);
+  progressBar.paintImmediately(0,0,jfrProgress.getWidth(),jfrProgress.getHeight());
+
+  //Bootleg Wait cause java sucks
+  for (int x = 0; x < 1500000000; x++)
+  {
+      ;
+  }
+  
   // create some properties and get the default Session
   Properties props = System.getProperties();
   props.put("mail.smtps.host", host);
@@ -49,8 +81,15 @@ public static void sentEmail(){
   Session session = Session.getInstance(props, null);
 
   // Progress ++;
-  //progressBar.setValue(30);
-  //progressBar.setString("Step 2 - Creating Email");
+  progressBar.setValue(33);
+  progressBar.setString("Step 2 - Creating Email");
+  progressBar.paintImmediately(0,0,jfrProgress.getWidth(),jfrProgress.getHeight());
+
+  //Bootleg Wait cause java sucks
+  for (int x = 0; x < 1500000000; x++)
+  {
+      ;
+  }
 
   try
   {
@@ -84,9 +123,10 @@ public static void sentEmail(){
       // set the Date: header
       msg.setSentDate(new Date());
 
-        // Progress ++;
-        //progressBar.setValue(60);
-        //progressBar.setString("Step 3 - Logging In And Sending Email");
+      // Progress ++;
+      progressBar.setValue(66);
+      progressBar.setString("Step 3 - Logging In And Sending Email");
+      progressBar.paintImmediately(0,0,jfrProgress.getWidth(),jfrProgress.getHeight());
 
       // Since Gmail is gay, needs auth, optonline didnt hence 
       // Didnt need user/pwd
@@ -97,8 +137,12 @@ public static void sentEmail(){
       transport.connect(host, "desktopgradeapp", "ufaufaufa");
       transport.sendMessage(msg, msg.getAllRecipients());
 
-        // Progress ++;
-       //progressBar.setValue(100);
+       // Progress ++;
+       progressBar.setValue(100);
+       progressBar.paintImmediately(0,0,jfrProgress.getWidth(),jfrProgress.getHeight());
+
+       //Close
+       jfrProgress.dispose();
 
   }
   catch (MessagingException mex)
