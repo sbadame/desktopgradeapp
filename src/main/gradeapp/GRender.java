@@ -7,9 +7,12 @@ import java.awt.GridLayout;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Map;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultCellViewFactory;
 import org.jgraph.graph.DefaultEdge;
@@ -61,10 +64,8 @@ public class GRender extends JPanel{
     }
 
     public void render(MinedTree tree){
-        //If the graph is already displaying a tree, then render it
-        if (root !=  null)
-           graph.getGraphLayoutCache().remove(new Object[]{root}, true, true);
-
+        graph.setModel(new DefaultGraphModel());//Clear the tree by replacing
+                                                //the model with a blank new one
 
         ArrayList<DefaultGraphCell> cells = buildCellsFromTree(tree);
         root = cells.get(0);
