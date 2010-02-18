@@ -231,7 +231,8 @@ public class GradeApp extends javax.swing.JFrame {
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void emailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailButtonActionPerformed
-    EmailSender.sentEmail();
+        // Its Static so I can pull this shit
+        EmailSender.sentEmail();
         // TODO add your handling code here:
     }//GEN-LAST:event_emailButtonActionPerformed
     
