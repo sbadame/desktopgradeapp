@@ -38,12 +38,12 @@ public class ExcelExample {
         HSSFRow KeyRow    = MainSheet.getRow(3);
         HSSFCell QNumCell   = KeyRow.getCell(4);
 
+        int QNum = new Integer(QNumCell.getRichStringCellValue().getString());
 
-        //double QNum = QNumCell.getNumericCellValue();
         
-        for(int i=7; i<=20; i++ ){
+        for(int i=7; i<=(7+QNum-1); i++ ){
             HSSFCell cell = KeyRow.getCell(i);
-            key.add(cell.getRichStringCellValue());
+            key.add(cell.getRichStringCellValue().getString().charAt(0));
         }
 
         System.out.println(key);
