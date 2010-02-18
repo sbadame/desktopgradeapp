@@ -2,21 +2,13 @@ package excel;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 import java.util.Vector;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-
 
 /** 
  * A simple working example of what it take to write an excel file based on
@@ -30,7 +22,10 @@ public class ExcelExample {
         Vector<Character> key = new Vector<Character>();
         Vector<Vector<Character>> students = new Vector<Vector<Character>>();
 
-        InputStream input = new FileInputStream("inputtest.xls");
+        //Use File.separator because differen OSs have different slashes
+        // Linux/Mac - "/" Windows - "\"
+        InputStream input = new FileInputStream("sampledata" + File.separator + "Math_103_Assessment_S10.xls");
+
         HSSFWorkbook wb     = new HSSFWorkbook(input);
 
         HSSFSheet MainSheet = wb.getSheetAt(0);
@@ -53,7 +48,7 @@ public class ExcelExample {
      
      
         /*try {
-            FileOutputStream out = new FileOutputStream("workbook.xls");
+            FileOutputStream out = new FileOutputStream("sampledata/workbook.xls");
             Workbook wb = new HSSFWorkbook();
             Sheet s = wb.createSheet(); 
             Row r = s.createRow(0);

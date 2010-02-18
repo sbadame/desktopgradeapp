@@ -121,6 +121,15 @@ public class Graph {
      * @return the tree
      */
     public MinedTree getTree() {
+        tree = new MinedTree("root");
+        tree.right = new MinedTree("right");
+        tree.wrong = new MinedTree("wrong");
+
+        tree.right.right = new MinedTree("Sandro");
+        tree.right.wrong = new MinedTree("Badame");
+
+        tree.wrong.right = new MinedTree("Do");
+        tree.wrong.wrong = new MinedTree("Work");
         return tree;
     }
 
