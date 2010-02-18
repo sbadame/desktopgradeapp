@@ -54,6 +54,7 @@ public class GradeApp extends javax.swing.JFrame {
             }
         });
 
+        emailButton.setForeground(new java.awt.Color(0, 0, 255));
         emailButton.setText("Email");
         emailButton.setEnabled(false);
         emailButton.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +65,6 @@ public class GradeApp extends javax.swing.JFrame {
 
         printButton.setText("Print");
         printButton.setEnabled(false);
-        
 
         goodGradePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Good Grade - " + Graph.DEFAULT_GOODGRADE));
 
@@ -231,7 +231,8 @@ public class GradeApp extends javax.swing.JFrame {
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void emailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailButtonActionPerformed
-    EmailSender.sentEmail();
+        // Its Static so I can pull this shit
+        EmailSender.sentEmail();
         // TODO add your handling code here:
     }//GEN-LAST:event_emailButtonActionPerformed
     

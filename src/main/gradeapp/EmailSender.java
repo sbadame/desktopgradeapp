@@ -11,29 +11,46 @@ import java.io.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
+import javax.swing.JFileChooser;
 
 /**
  *
- * @author sandro
+ * @author DiFiore
  */
 // Most of Code Ripped From:
 // http://www.java-tips.org/other-api-tips/javamail/how-to-send-an-email-with-a-file-attachment.html
 public class EmailSender {
 public static void sentEmail(){
-JOptionPane.showMessageDialog(null, "Wait A Sec ... Hacking ... Sending Email ...");
 
   // Change If Needed Here
-  String to = "desktopgradeapp@gmail.com";
-  String from = "bigantfbi333@optonline.net";
-  String host = "mail.optonline.net";
-  String filename = "gayjava.txt";
+  String to = JOptionPane.showInputDialog("Input Email Address To Send File.", "anthonydifiore333@gmail.com");
+  String from = "desktopgradeapp@gmail.com";
+  String host = "smtp.gmail.com";
+  // Sandor code nazi didnt want hardcode file name
+  // So will use gay java file chooser
+  // OO takes all fun out of programming
+  //String filename = "gayjava.txt";
   String msgText1 = "See Attachment For Grade Graph.\nDo Not Reply To This Email.\n";
   String subject = "Grade Graph Results";
 
+  JFileChooser fc = new JFileChooser();
+  fc.showOpenDialog(null);
+  File filename= fc.getSelectedFile();
+
+  // Start Thread...OverKill Code
+  //new Thread(new GayStatusBar()).start();
+
   // create some properties and get the default Session
   Properties props = System.getProperties();
-  props.put("mail.smtp.host", host);
+  props.put("mail.smtps.host", host);
+  props.put("mail.smtps.auth", "true");
+  // If 25 no work try 587 or 465
+  props.put("mail.smtp.port", "25");
   Session session = Session.getInstance(props, null);
+
+  // Progress ++;
+  //progressBar.setValue(30);
+  //progressBar.setString("Step 2 - Creating Email");
 
   try
   {
@@ -51,8 +68,8 @@ JOptionPane.showMessageDialog(null, "Wait A Sec ... Hacking ... Sending Email ..
       // create the second message part
       MimeBodyPart mbp2 = new MimeBodyPart();
 
-            // attach the file to the message
-         FileDataSource fds = new FileDataSource(filename);
+      // attach the file to the message
+      FileDataSource fds = new FileDataSource(filename);
       mbp2.setDataHandler(new DataHandler(fds));
       mbp2.setFileName(fds.getName());
 
@@ -67,8 +84,21 @@ JOptionPane.showMessageDialog(null, "Wait A Sec ... Hacking ... Sending Email ..
       // set the Date: header
       msg.setSentDate(new Date());
 
-      // send the message
-      Transport.send(msg);
+        // Progress ++;
+        //progressBar.setValue(60);
+        //progressBar.setString("Step 3 - Logging In And Sending Email");
+
+      // Since Gmail is gay, needs auth, optonline didnt hence 
+      // Didnt need user/pwd
+      // Connect is inhertied from serivce in gay java language
+      // Needed instance for .connect function not static uggh
+      Transport transport = session.getTransport("smtps");
+      // SendMessage also not static, hence needing instance of transport to do work
+      transport.connect(host, "desktopgradeapp", "ufaufaufa");
+      transport.sendMessage(msg, msg.getAllRecipients());
+
+        // Progress ++;
+       //progressBar.setValue(100);
 
   }
   catch (MessagingException mex)
@@ -79,7 +109,7 @@ JOptionPane.showMessageDialog(null, "Wait A Sec ... Hacking ... Sending Email ..
     ex.printStackTrace();
       }
   }
-  JOptionPane.showMessageDialog(null, "Done Hacking ... Sent Email.");
+  JOptionPane.showMessageDialog(null, "Dear User,\nYour Email Was Sent.\nSincerely,\nHacker.\n");
 }
 
 }

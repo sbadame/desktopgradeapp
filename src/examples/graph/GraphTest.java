@@ -16,16 +16,15 @@ import org.jgraph.graph.*;
  * Specifically pages 106-113 for Tree Layout info and 17-22 for everything else
  * @author Sandro Badame <a href="mailto:s.badame@gmail.com">s.badame&amp;gmail.com</a>
  */
-public class JGraphTest extends JFrame {
+public class GraphTest extends JFrame {
 
-    public JGraphTest(){
-        //DefaultGraphModel model = new DefaultGraphModel();
-    }
+    public GraphModel model;
+    public JGraph graph;
 
-    public static void main(String[] args) {
-        GraphModel model  = new DefaultGraphModel();
+    public GraphTest(){
+        model  = new DefaultGraphModel();
         GraphLayoutCache view = new GraphLayoutCache(model, new DefaultCellViewFactory());
-        JGraph graph = new JGraph(model, view);
+        graph = new JGraph(model, view);
 
         DefaultGraphCell[] cells = new DefaultGraphCell[3];
         //0
@@ -68,13 +67,21 @@ public class JGraphTest extends JFrame {
         Map nested = facade.createNestedMap(true, true);
         graph.getGraphLayoutCache().edit(nested); //Apply changes
 
-        JGraphTest jGraphTest = new JGraphTest();
-        jGraphTest.getContentPane().add(new JScrollPane(graph));
-        jGraphTest.pack();
-        jGraphTest.setLocationRelativeTo(null);
+        getContentPane().add(new JScrollPane(graph));
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public GraphTest(String s){
+        
+    }
+
+    public static void main(String[] args) {
+        GraphTest jGraphTest = new GraphTest();
         jGraphTest.setVisible(true);
-        //adding this line below to try out the print function
-        GraphPrintTest.printComponent(jGraphTest);
         jGraphTest.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
