@@ -1,8 +1,16 @@
 package excel;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.Vector;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -17,8 +25,34 @@ import org.apache.poi.ss.usermodel.Workbook;
  */
 public class ExcelExample {
 
-    public static void main(String[] args) {
-        try {
+    public static void main(String[] args) throws IOException {
+
+        Vector<Character> key = new Vector<Character>();
+        Vector<Vector<Character>> students = new Vector<Vector<Character>>();
+
+        InputStream input = new FileInputStream("inputtest.xls");
+        HSSFWorkbook wb     = new HSSFWorkbook(input);
+
+        HSSFSheet MainSheet = wb.getSheetAt(0);
+
+        HSSFRow KeyRow    = MainSheet.getRow(3);
+        HSSFCell QNumCell   = KeyRow.getCell(4);
+
+        int QNum = new Integer(QNumCell.getRichStringCellValue().getString());
+
+        
+        for(int i=7; i<=(7+QNum-1); i++ ){
+            HSSFCell cell = KeyRow.getCell(i);
+            key.add(cell.getRichStringCellValue().getString().charAt(0));
+        }
+
+        System.out.println(key);
+
+
+        System.out.println(QNumCell);
+     
+     
+        /*try {
             FileOutputStream out = new FileOutputStream("workbook.xls");
             Workbook wb = new HSSFWorkbook();
             Sheet s = wb.createSheet(); 
@@ -31,7 +65,7 @@ public class ExcelExample {
             ex.printStackTrace();
         } catch (IOException ioe){
             ioe.printStackTrace();
-        }
+        }*/
 
     }
 }
