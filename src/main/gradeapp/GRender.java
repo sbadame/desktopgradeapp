@@ -37,6 +37,7 @@ public class GRender extends JPanel{
         model = new DefaultGraphModel();
         view = new GraphLayoutCache(model, new DefaultCellViewFactory());
         graph = new JGraph(model, view);
+        graph.setAntiAliased(true);
 
         //Configure our layout
         layout = new JGraphTreeLayout();
@@ -111,15 +112,18 @@ public class GRender extends JPanel{
         edge.setTarget(target.getChildAt(0));
         GraphConstants.setLineEnd(edge.getAttributes(), GraphConstants.ARROW_CLASSIC); 
         GraphConstants.setEndFill(edge.getAttributes(), true);
+        GraphConstants.setEditable(edge.getAttributes(), false);
         return edge;
     }
 
     private DefaultGraphCell getCell(MinedTree tree){
-       DefaultGraphCell cell = new DefaultGraphCell(tree.message);
+        DefaultGraphCell cell = new DefaultGraphCell(tree.message);
         GraphConstants.setBounds(cell.getAttributes(), new Rectangle2D.Double(140,140,40,20));
-       GraphConstants.setGradientColor(cell.getAttributes(), Color.ORANGE);
-       GraphConstants.setOpaque(cell.getAttributes(), true);
-       return cell;
+        GraphConstants.setGradientColor(cell.getAttributes(), Color.ORANGE);
+        GraphConstants.setOpaque(cell.getAttributes(), true);
+        GraphConstants.setAutoSize(cell.getAttributes(), true);
+        GraphConstants.setEditable(cell.getAttributes(), false);
+        return cell;
     }
 
 }
