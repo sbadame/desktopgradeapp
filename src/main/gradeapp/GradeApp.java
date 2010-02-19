@@ -212,7 +212,7 @@ public class GradeApp extends javax.swing.JFrame {
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        HelpShower.showHelp();
+        HelperButton.createAndShowGUI();
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void gradeSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_gradeSliderStateChanged
