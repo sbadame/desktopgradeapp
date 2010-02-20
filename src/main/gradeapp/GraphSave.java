@@ -18,6 +18,7 @@ public class GraphSave {
 
     public static void saveImage(Component myComponent) {
         String name;
+        File finishedproduct=null;
         FileFilter pngfilter = new FileNameExtensionFilter("PNG Files","png");
         Dimension size = myComponent.getSize();
         BufferedImage myImage = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
@@ -29,9 +30,14 @@ public class GraphSave {
         //it is here just to reassure the user that even if he/she does 
         //not specify the filename, the image will be saved to the png format
         open_window.showSaveDialog(null);
-        name = open_window.getSelectedFile().getAbsolutePath();
-        name+=".png";
-        File finishedproduct = new File(name);
+        name=null;
+        try{
+            name = open_window.getSelectedFile().getAbsolutePath();
+        }catch(NullPointerException err){}
+        if(name!=null){
+            name+=".png";
+            finishedproduct = new File(name);
+        }
         if(finishedproduct!=null){
         try{
             ImageIO.write(myImage, "png", finishedproduct);
