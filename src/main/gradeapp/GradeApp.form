@@ -93,6 +93,9 @@
         <Property name="text" type="java.lang.String" value="Print"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="GradeApp_printButton"/>
+      </AuxValues>
     </Component>
     <Container class="javax.swing.JPanel" name="goodGradePanel">
       <Properties>
@@ -109,7 +112,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="gradeSlider" pref="811" max="32767" attributes="0"/>
+                  <Component id="gradeSlider" pref="863" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -153,7 +156,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="noiseSlider" pref="811" max="32767" attributes="0"/>
+                  <Component id="noiseSlider" pref="863" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -186,7 +189,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="gRender" alignment="1" pref="835" max="32767" attributes="0"/>
+              <Component id="gRender" alignment="1" pref="889" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">

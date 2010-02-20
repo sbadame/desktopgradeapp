@@ -6,6 +6,7 @@
 
 package gradeapp;
 
+import java.awt.event.WindowAdapter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
 /**
@@ -21,6 +23,7 @@ import javax.swing.border.TitledBorder;
 public class GradeApp extends javax.swing.JFrame {
 
     /** Creates new form GradeApp */
+
     public GradeApp() {
         initComponents();
     }
@@ -84,7 +87,7 @@ public class GradeApp extends javax.swing.JFrame {
         goodGradePanelLayout.setHorizontalGroup(
             goodGradePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(goodGradePanelLayout.createSequentialGroup()
-                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
                 .addContainerGap())
         );
         goodGradePanelLayout.setVerticalGroup(
@@ -109,7 +112,7 @@ public class GradeApp extends javax.swing.JFrame {
         noiseSliderPanelLayout.setHorizontalGroup(
             noiseSliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(noiseSliderPanelLayout.createSequentialGroup()
-                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 811, Short.MAX_VALUE)
+                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
                 .addContainerGap())
         );
         noiseSliderPanelLayout.setVerticalGroup(
@@ -123,7 +126,7 @@ public class GradeApp extends javax.swing.JFrame {
         graphPanel.setLayout(graphPanelLayout);
         graphPanelLayout.setHorizontalGroup(
             graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gRender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
+            .addComponent(gRender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
         );
         graphPanelLayout.setVerticalGroup(
             graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,11 +242,13 @@ public class GradeApp extends javax.swing.JFrame {
 
     private void emailButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
         File tmpFile = GraphSave.tempMaker(gRender); //Difiore use this!!!
-        EmailSender.sentEmail();
+        // Thanks gRender private, had to pass in tmpFile
+        // O Well
+        // Its Static so I can pull this shit
+        EmailSender.sentEmail(tmpFile);
     }                                           
     
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailButtonActionPerformed
-        // Its Static so I can pull this shit
         GraphPrint.printComponent(graphPanel);
         // TODO add your handling code here:
     }//GEN-LAST:event_emailButtonActionPerformed
@@ -260,7 +265,9 @@ public class GradeApp extends javax.swing.JFrame {
                 gradeApp.setLocationRelativeTo(null);
                 gradeApp.setVisible(true);
                 gradeApp.setTitle("The Weeder");
-                gradeApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                gradeApp.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                // Ask User For Confirmation of Close
+             
             }
         });
     }

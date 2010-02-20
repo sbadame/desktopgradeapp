@@ -5,6 +5,7 @@
 
 package gradeapp;
 
+// Imports
 import java.awt.BorderLayout;
 import java.awt.Container;
 import javax.swing.JOptionPane;
@@ -13,9 +14,9 @@ import java.io.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -23,25 +24,26 @@ import javax.swing.JProgressBar;
  */
 // Most of Code Ripped From:
 // http://www.java-tips.org/other-api-tips/javamail/how-to-send-an-email-with-a-file-attachment.html
-public class EmailSender {
-public static void sentEmail(){
 
-  // Change If Needed Here
+public class EmailSender {
+public static void sentEmail(File tmpFile){
+
+  // Ask For Email Input
   String to = JOptionPane.showInputDialog("Input Email Address To Send File.", "desktopgradeapp@gmail.com");
+
+  // Handles Cancel And Exit Button On Input Box
+  if (to == null)
+        return;
+
+  // Sending Address And Host
   String from = "desktopgradeapp@gmail.com";
   String host = "smtp.gmail.com";
-  // Sandor code nazi didnt want hardcode file name
-  // So will use gay java file chooser
-  // OO takes all fun out of programming
+
+  //OO takes all fun out of programming
   //String filename = "gayjava.txt";
+  //Message Of Email
   String msgText1 = "See Attachment For Grade Graph.\nDo Not Reply To This Email.\n";
   String subject = "Grade Graph Results";
-
-  // Creates Browse Box
-  JFileChooser fc = new JFileChooser();
-  fc.showOpenDialog(null);
-  File filename= fc.getSelectedFile();
-  filename = GraphSave.tempMaker(fc);
 
   // Make New Frame For Bar
   JFrame jfrProgress = new JFrame("Emailing File In Progress...");
@@ -51,16 +53,20 @@ public static void sentEmail(){
   jfrProgress.setLocation(420,350);
   jfrProgress.setSize(600,90);
   jfrProgress.setVisible(true);
+  
+  // Tries To Make Bar Close On Exit But Bar Sometimes Too Fast
+  jfrProgress.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+  // Bar Progress Counter
   int progress = 100;
 
   // Make Bar
   JProgressBar progressBar = new JProgressBar(0, progress);
-
+  String doing = "Step 1 - Setting Hosts.";
   jfrProgress.getContentPane().add(progressBar,BorderLayout.CENTER);
   progressBar.setValue(0);
   progressBar.setStringPainted(true);
-  progressBar.setString("Step 1 - Setting Hosts.");
+  progressBar.setString(doing);
   
   progressBar.setSize(600, 60);
   progressBar.setVisible(true);
@@ -74,7 +80,7 @@ public static void sentEmail(){
       ;
   }
   
-  // create some properties and get the default Session
+  // Create some properties and get the default Session
   Properties props = System.getProperties();
   props.put("mail.smtps.host", host);
   props.put("mail.smtps.auth", "true");
@@ -84,7 +90,8 @@ public static void sentEmail(){
 
   // Progress ++;
   progressBar.setValue(33);
-  progressBar.setString("Step 2 - Creating Email.");
+  doing = "Step 2 - Creating Email.";
+  progressBar.setString(doing);
   progressBar.paintImmediately(0,0,jfrProgress.getWidth(),jfrProgress.getHeight());
 
   //Bootleg Wait cause java sucks
@@ -95,39 +102,40 @@ public static void sentEmail(){
 
   try
   {
-      // create a message
+      // Create a message
       MimeMessage msg = new MimeMessage(session);
       msg.setFrom(new InternetAddress(from));
       InternetAddress[] address = {new InternetAddress(to)};
       msg.setRecipients(Message.RecipientType.TO, address);
       msg.setSubject(subject);
 
-      // create and fill the first message part
+      // Create and fill the first message part
       MimeBodyPart mbp1 = new MimeBodyPart();
       mbp1.setText(msgText1);
 
-      // create the second message part
+      // Create the second message part
       MimeBodyPart mbp2 = new MimeBodyPart();
 
-      // attach the file to the message
-      FileDataSource fds = new FileDataSource(filename);
+      // Attach the file to the message
+      FileDataSource fds = new FileDataSource(tmpFile);
       mbp2.setDataHandler(new DataHandler(fds));
       mbp2.setFileName(fds.getName());
 
-      // create the Multipart and add its parts to it
+      // Create the Multipart and add its parts to it
       Multipart mp = new MimeMultipart();
       mp.addBodyPart(mbp1);
       mp.addBodyPart(mbp2);
 
-      // add the Multipart to the message
+      // Add the Multipart to the message
       msg.setContent(mp);
 
-      // set the Date: header
+      // Set the Date: header
       msg.setSentDate(new Date());
 
       // Progress ++;
       progressBar.setValue(66);
-      progressBar.setString("Step 3 - Logging In And Sending Email.");
+      doing = "Step 3 - Connecting To Internet And Sending Email.";
+      progressBar.setString(doing);
       progressBar.paintImmediately(0,0,jfrProgress.getWidth(),jfrProgress.getHeight());
 
       // Since Gmail is gay, needs auth, optonline didnt hence 
@@ -146,16 +154,22 @@ public static void sentEmail(){
        //Close
        jfrProgress.dispose();
 
+       JOptionPane.showMessageDialog(null, "Dear User,\nYour Email Was Successfully Sent.\nSincerely,\nHacker.\n");
+
   }
   catch (MessagingException mex)
   {
-      mex.printStackTrace();
+      String error;
+      error = mex.getMessage();
+      System.out.println(error);
+      jfrProgress.dispose();
+      JOptionPane.showMessageDialog(null, "Dear User,\nAn Error Occured During:\n" + doing + "\nYour Email Could Not Be Sent.\nPossible Solutions:\nCheck Internet Connection.\nCheck Inputted Email Address.\nCheck Gmail Server.\n" + "Sincerely,\nHacker.\n");
       Exception ex = null;
       if ((ex = mex.getNextException()) != null) {
     ex.printStackTrace();
       }
   }
-  JOptionPane.showMessageDialog(null, "Dear User,\nYour Email Was Sent.\nSincerely,\nHacker.\n");
+ 
 }
 
 }
