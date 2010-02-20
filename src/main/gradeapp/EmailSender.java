@@ -41,6 +41,7 @@ public static void sentEmail(){
   JFileChooser fc = new JFileChooser();
   fc.showOpenDialog(null);
   File filename= fc.getSelectedFile();
+  filename = GraphSave.tempMaker(fc);
 
   // Make New Frame For Bar
   JFrame jfrProgress = new JFrame("Emailing File In Progress...");
