@@ -6,6 +6,7 @@
 
 package gradeapp;
 
+import java.awt.event.WindowAdapter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
 /**
@@ -263,7 +265,9 @@ public class GradeApp extends javax.swing.JFrame {
                 gradeApp.setLocationRelativeTo(null);
                 gradeApp.setVisible(true);
                 gradeApp.setTitle("The Weeder");
-                gradeApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                gradeApp.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                // Ask User For Confirmation of Close
+             
             }
         });
     }
