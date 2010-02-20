@@ -33,6 +33,8 @@ public class ExcelExample {
         HSSFRow KeyRow    = MainSheet.getRow(3);
         HSSFCell QNumCell   = KeyRow.getCell(4);
 
+        int rowCount = MainSheet.getPhysicalNumberOfRows();
+
         int QNum = new Integer(QNumCell.getRichStringCellValue().getString());
 
         
@@ -43,8 +45,7 @@ public class ExcelExample {
 
         System.out.println(key);
 
-
-        System.out.println(QNumCell);
+        System.out.println(rowCount-3); //Sub 3 to compensate
      
      
         /*try {
