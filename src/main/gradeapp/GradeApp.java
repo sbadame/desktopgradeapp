@@ -6,15 +6,12 @@
 
 package gradeapp;
 
-import java.awt.event.WindowAdapter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
 /**
@@ -70,11 +67,6 @@ public class GradeApp extends javax.swing.JFrame {
 
         printButton.setText("Print");
         printButton.setEnabled(false);
-        printButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printButtonActionPerformed(evt);
-            }
-        });
 
         goodGradePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Good Grade - " + Graph.DEFAULT_GOODGRADE));
 
@@ -92,7 +84,7 @@ public class GradeApp extends javax.swing.JFrame {
         goodGradePanelLayout.setHorizontalGroup(
             goodGradePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(goodGradePanelLayout.createSequentialGroup()
-                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
+                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
                 .addContainerGap())
         );
         goodGradePanelLayout.setVerticalGroup(
@@ -102,7 +94,7 @@ public class GradeApp extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        noiseSliderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Noise - " + Graph.DEFAULT_NOISE));
+        noiseSliderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Noise - " + Graph.DEFAULT_NOISE + "%"));
 
         noiseSlider.setValue((int)(Graph.DEFAULT_NOISE*100));
         noiseSlider.setEnabled(false);
@@ -117,7 +109,7 @@ public class GradeApp extends javax.swing.JFrame {
         noiseSliderPanelLayout.setHorizontalGroup(
             noiseSliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(noiseSliderPanelLayout.createSequentialGroup()
-                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
+                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
                 .addContainerGap())
         );
         noiseSliderPanelLayout.setVerticalGroup(
@@ -173,7 +165,7 @@ public class GradeApp extends javax.swing.JFrame {
                         .addComponent(printButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(saveButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 564, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 641, Short.MAX_VALUE)
                         .addComponent(helpButton)))
                 .addContainerGap())
         );
@@ -218,6 +210,7 @@ public class GradeApp extends javax.swing.JFrame {
         saveButton.setEnabled(true);
         printButton.setEnabled(true);
         noiseSlider.setEnabled(true);
+        gradeSlider.setMaximum(Graph.getGraph().getAnswerkey().size());
         gradeSlider.setEnabled(true);// TODO add your handling code here:
     }//GEN-LAST:event_loadButtonActionPerformed
 
@@ -226,18 +219,17 @@ public class GradeApp extends javax.swing.JFrame {
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void gradeSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_gradeSliderStateChanged
-
-        Graph.getGraph().setGoodgrade(gradeSlider.getValue());   // TODO add your handling code hs......ere:
+        Graph.getGraph().setGoodgrade(gradeSlider.getValue());   
         String title = "Good Grade - ";
-        ((TitledBorder)goodGradePanel.getBorder()).setTitle(title + gradeSlider.getValue());
+        ((TitledBorder)goodGradePanel.getBorder()).setTitle(title + gradeSlider.getValue() + "/" + Graph.getGraph().getAnswerkey().size());
         goodGradePanel.repaint();
         gRender.render();
     }//GEN-LAST:event_gradeSliderStateChanged
 
     private void noiseSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_noiseSliderStateChanged
-        Graph.getGraph().setNoise(noiseSlider.getValue());
+        Graph.getGraph().setNoise(noiseSlider.getValue()/100.0f);
         String title = "Noise - ";
-        ((TitledBorder)noiseSliderPanel.getBorder()).setTitle(title + noiseSlider.getValue());// TODO add your handling code here:
+        ((TitledBorder)noiseSliderPanel.getBorder()).setTitle(title + noiseSlider.getValue() + "%");
         noiseSliderPanel.repaint();
         gRender.render();
     }//GEN-LAST:event_noiseSliderStateChanged
