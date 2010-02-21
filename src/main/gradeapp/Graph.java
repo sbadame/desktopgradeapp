@@ -66,24 +66,7 @@ public class Graph {
         for (int i = 0; i < ans.length; i++) {
             ans[i] = String.valueOf(answerkey.get(i));
         }
-        System.out.println(" -- Boothe--");
-        System.out.println("getNoise() = " + getNoise());
-        System.out.println("getGoodgrade() = " + getGoodgrade());
-        for (String string : ans) {
-            System.out.print(string+",");
-        }
-        System.out.println();
-
-        System.out.println("Students");
-        for (String[] stuf : students) {
-            for (String string : stuf) {
-                System.out.print(string+",");
-            }
-            System.out.println();
-        }
-
         tree = new MinedTree(getNoise(), getGoodgrade(), ans, students);
-        System.out.println(tree);
     }
 
 

@@ -17,7 +17,6 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 public class ExcelReader{
     Vector<Character> key = new Vector<Character>();
     Vector<Vector<Character>> students = new Vector<Vector<Character>>();
-    Vector<Character> studAns = new Vector<Character>();
 
     public ExcelReader (File in) throws IOException{
         HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream(in));
@@ -34,7 +33,7 @@ public class ExcelReader{
         }
 
         for(int j=4; j < rowCount-3; j++){
-                studAns.clear();
+                Vector<Character> studAns = new Vector<Character>();
                 HSSFRow studRow = MainSheet.getRow(j);
                 for(int k=7; k<=(7+QNum-1); k++){
                     HSSFCell studCell = studRow.getCell(k);
