@@ -62,7 +62,12 @@ public class Graph {
             }
             students.add(s);
         }
-        tree = new MinedTree(getNoise(), (int)getGoodgrade(), answerkey.toArray(new String[]{}), students);
+        String[] ans = new String[answerkey.size()];
+        for (int i = 0; i < ans.length; i++) {
+            ans[i] = String.valueOf(answerkey.get(i));
+        }
+        tree = new MinedTree(getNoise(), (int)getGoodgrade(), ans, students);
+        System.out.println(tree.right);
     }
 
     /**
