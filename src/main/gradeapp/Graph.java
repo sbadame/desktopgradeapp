@@ -69,16 +69,23 @@ public class Graph {
         System.out.println(" -- Boothe--");
         System.out.println("getNoise() = " + getNoise());
         System.out.println("getGoodgrade() = " + getGoodgrade());
+        for (String string : ans) {
+            System.out.print(string+",");
+        }
+        System.out.println();
+
+        System.out.println("Students");
+        for (String[] stuf : students) {
+            for (String string : stuf) {
+                System.out.print(string+",");
+            }
+            System.out.println();
+        }
+
         tree = new MinedTree(getNoise(), getGoodgrade(), ans, students);
+        System.out.println(tree);
     }
 
-    private void printTree(MinedTree t, int tabs){
-        System.out.println(t.toString());
-        for (int i = 0; i < tabs; i++) {
-            System.out.print("\t");
-        }
-        System.out.println("Right:");
-    }
 
     /**
      * @return the goodgrade
