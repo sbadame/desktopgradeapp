@@ -7,12 +7,9 @@ import java.awt.GridLayout;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Map;
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 import org.jgraph.JGraph;
 import org.jgraph.graph.DefaultCellViewFactory;
 import org.jgraph.graph.DefaultEdge;
@@ -118,7 +115,7 @@ public class GRender extends JPanel{
     }
 
     private DefaultGraphCell getCell(MinedTree tree){
-        DefaultGraphCell cell = new DefaultGraphCell(tree.message);
+        DefaultGraphCell cell = new DefaultGraphCell(tree);
         GraphConstants.setBounds(cell.getAttributes(), new Rectangle2D.Double(140,140,40,20));
         GraphConstants.setGradientColor(cell.getAttributes(), Color.ORANGE);
         GraphConstants.setOpaque(cell.getAttributes(), true);

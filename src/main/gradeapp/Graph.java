@@ -52,7 +52,17 @@ public class Graph {
     }
 
     private void BootheAlgo(){
-
+        ///UGHGHG BOOTHE!!!! Converting from Vector<Vector<Charactor>> to
+        //Vector<String[]> like Boothe wants.
+        Vector<String[]> students = new Vector<String[]>();
+        for (Vector<Character> student : grades) {
+            String[] s = new String[student.size()];
+            for (int i = 0; i < student.size(); i++) {
+                s[i] = String.valueOf(student.get(i));
+            }
+            students.add(s);
+        }
+        tree = new MinedTree(getNoise(), (int)getGoodgrade(), answerkey.toArray(new String[]{}), students);
     }
 
     /**
@@ -121,15 +131,6 @@ public class Graph {
      * @return the tree
      */
     public MinedTree getTree() {
-        tree = new MinedTree("root");
-        tree.right = new MinedTree("right");
-        tree.wrong = new MinedTree("wrong");
-
-        tree.right.right = new MinedTree("Sandro");
-        tree.right.wrong = new MinedTree("Badame");
-
-        tree.wrong.right = new MinedTree("Do");
-        tree.wrong.wrong = new MinedTree("Work");
         return tree;
     }
 
