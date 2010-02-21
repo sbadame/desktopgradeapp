@@ -1,6 +1,8 @@
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
+ *
+ * Coding based off of Sun Microsystems "help menu java tutorial"
  */
 
 package gradeapp;
@@ -8,6 +10,7 @@ package gradeapp;
 
 
 import javax.swing.JOptionPane;
+import java.awt.Dimension;
 import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
@@ -32,11 +35,10 @@ public class HelperButton extends JPanel{
 
 
     JLabel label;
-    ImageIcon icon = createImageIcon("images/middle.gif");
+
     JFrame frame;
     String simpleDialogDesc = "Some simple message dialogs";
-    String iconDesc = "A JOptionPane has its choice of icons";
-    String moreDialogDesc = "Some more dialogs";
+
     CustomDialog2 customDialog2;
 
     /** Creates the GUI shown inside the frame's content pane. */
@@ -49,7 +51,7 @@ public class HelperButton extends JPanel{
         //Create the components.
         JPanel frequentPanel = createSimpleDialogBox();
 
-        label = new JLabel("Click the \"Show it!\" button"
+        label = new JLabel("Click the \"Select\" button"
                            + " to bring up the selected dialog.",
                            JLabel.CENTER);
 
@@ -67,6 +69,9 @@ public class HelperButton extends JPanel{
         add(tabbedPane, BorderLayout.CENTER);
         add(label, BorderLayout.PAGE_END);
         label.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+
+
+
     }
 
     /** Sets the text displayed at the bottom of the frame. */
@@ -90,7 +95,7 @@ public class HelperButton extends JPanel{
 
 
      private JPanel createSimpleDialogBox() {
-        final int numButtons = 5;
+        final int numButtons = 7;
         JRadioButton[] radioButtons = new JRadioButton[numButtons];
         final ButtonGroup group = new ButtonGroup();
 
@@ -101,6 +106,8 @@ public class HelperButton extends JPanel{
         final String emailTree = "emailTree";
         final String printTree = "printTree";
         final String authorsBib = "authorsBib";
+        final String noiser = "noiser";
+        final String gradebar = "gradebar";
 
         radioButtons[0] = new JRadioButton("How to Upload a File.");
         radioButtons[0].setActionCommand(defaultMessageCommand);
@@ -116,6 +123,12 @@ public class HelperButton extends JPanel{
 
         radioButtons[4] = new JRadioButton("Authors and Bibliography.");
         radioButtons[4].setActionCommand(authorsBib);
+        
+        radioButtons[5] = new JRadioButton("Setting the noise degree.");
+        radioButtons[5].setActionCommand(noiser);
+        
+        radioButtons[6] = new JRadioButton("Setting a good grade standard.");
+        radioButtons[6].setActionCommand(gradebar);
 
         for (int i = 0; i < numButtons; i++) {
             group.add(radioButtons[i]);
@@ -147,7 +160,14 @@ public class HelperButton extends JPanel{
                 } else if (command == authorsBib) {
                    JOptionPane.showMessageDialog(frame,
                                 "This is the answer for the Authors and Bibliography. selection.");
+                } else if (command == noiser) {
+                   JOptionPane.showMessageDialog(frame,
+                                "This is the answer for the noise. selection.");
+                }else if (command == gradebar) {
+                   JOptionPane.showMessageDialog(frame,
+                                "This is the answer for the grade set. selection.");
                 }
+                
                 return;
             }
         });
@@ -192,7 +212,8 @@ public class HelperButton extends JPanel{
     public static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("Help Menu");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
 
         //Create and set up the content pane.
         HelperButton newContentPane = new HelperButton(frame);
