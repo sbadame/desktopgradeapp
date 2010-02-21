@@ -89,6 +89,16 @@
         </target>
     -->
  
+        <target name="example-boothe" depends="build">
+          <java fork="true" classname="boothe.BootheAlgo" >
+            <arg value="sampledata/boothesample.txt" />
+            <classpath>
+                <path refid="lib.path"/>
+                <path location="bin/main"/>
+                <path location="bin/examples"/>
+            </classpath>
+          </java>
+        </target>
     <!-- Example program that explores some HSSF excel magic
      You probably want to read the source first to see what it does -->
     <target name="example-excel" depends="build">

@@ -72,6 +72,14 @@ public class Graph {
         tree = new MinedTree(getNoise(), getGoodgrade(), ans, students);
     }
 
+    private void printTree(MinedTree t, int tabs){
+        System.out.println(t.toString());
+        for (int i = 0; i < tabs; i++) {
+            System.out.print("\t");
+        }
+        System.out.println("Right:");
+    }
+
     /**
      * @return the goodgrade
      */
