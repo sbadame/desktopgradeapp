@@ -204,7 +204,6 @@ public class GradeApp extends javax.swing.JFrame {
         if (fc.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
             return;
         File input = fc.getSelectedFile();
-        System.out.println(input);
         try {
             Graph.createGraph(input);
             gRender.render();
