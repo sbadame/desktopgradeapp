@@ -58,12 +58,7 @@ public class ExcelExample {
             }
             students.add(studAns);
         }
-
-        System.out.println(key);
-
-        System.out.println(students); //Sub 3 to compensate
-     
-     
+   
         /*try {
             FileOutputStream out = new FileOutputStream("sampledata/workbook.xls");
             Workbook wb = new HSSFWorkbook();
