@@ -19,8 +19,8 @@ public class ExcelReader{
     Vector<Vector<Character>> students = new Vector<Vector<Character>>();
     Vector<Character> studAns = new Vector<Character>();
 
-    public ExcelReader (FileInputStream in) throws IOException{
-        HSSFWorkbook wb = new HSSFWorkbook(in);
+    public ExcelReader (File in) throws IOException{
+        HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream(in));
         HSSFSheet MainSheet = wb.getSheetAt(0);
         HSSFRow KeyRow    = MainSheet.getRow(3);
         HSSFCell QNumCell   = KeyRow.getCell(4);
