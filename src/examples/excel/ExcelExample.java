@@ -21,6 +21,7 @@ public class ExcelExample {
 
         Vector<Character> key = new Vector<Character>();
         Vector<Vector<Character>> students = new Vector<Vector<Character>>();
+        Vector<Character> studAns = new Vector<Character>();
 
         //Use File.separator because differen OSs have different slashes
         // Linux/Mac - "/" Windows - "\"
@@ -33,18 +34,34 @@ public class ExcelExample {
         HSSFRow KeyRow    = MainSheet.getRow(3);
         HSSFCell QNumCell   = KeyRow.getCell(4);
 
+        int rowCount = MainSheet.getPhysicalNumberOfRows();
+
         int QNum = new Integer(QNumCell.getRichStringCellValue().getString());
 
         
         for(int i=7; i<=(7+QNum-1); i++ ){
-            HSSFCell cell = KeyRow.getCell(i);
-            key.add(cell.getRichStringCellValue().getString().charAt(0));
+            HSSFCell keyCell = KeyRow.getCell(i);
+            key.add(keyCell.getRichStringCellValue().getString().charAt(0));
+        }
+
+        for(int j=4; j<rowCount-3; j++ ){
+            studAns.clear();
+            HSSFRow studRow = MainSheet.getRow(j);
+            for(int k=7; k<=(7+QNum-1); k++){
+                HSSFCell studCell = studRow.getCell(k);
+                if(studCell == null){
+                    studAns.add(' ');
+                }
+                else{
+                    studAns.add(studCell.getRichStringCellValue().getString().charAt(0));
+                }
+            }
+            students.add(studAns);
         }
 
         System.out.println(key);
 
-
-        System.out.println(QNumCell);
+        System.out.println(students); //Sub 3 to compensate
      
      
         /*try {
