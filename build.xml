@@ -15,7 +15,7 @@
     <target name="dist" depends="compile" description="Builds the jar'd version of GradeApp">
 	<mkdir dir="dist" />
 	<mkdir dir="dist/lib" />
-	<jar jarfile="dist/GradeApp.jar" index="true">
+	<jar jarfile="dist/GradeApp.jar">
 	    <fileset dir="bin/main"/>
 	    <manifest>
 		<attribute name="Implementation-Vendor" value="Desktop Application Group"/>
