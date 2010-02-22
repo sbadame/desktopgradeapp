@@ -171,7 +171,6 @@
     <!-- Build exe for Windows, Lifted from: http://launch4j.sourceforge.net/docs.html -->
     <taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="lib/launch4j/launch4j.jar:lib/launch4j/xstream.jar"/>
     <target name="build-windows" depends="dist">
-	<mkdir dir="dist/windows"/>
 	<launch4j configFile="lib/launch4j/gradeappconfig.xml" />
     </target>
 

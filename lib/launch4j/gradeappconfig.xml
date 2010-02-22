@@ -1,9 +1,9 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
-  <jar>/home/sandro/Documents/homework/SE/desktopgradeapp/dist/GradeApp.jar</jar>
-  <outfile>/home/sandro/Documents/homework/SE/desktopgradeapp/dist/windows/GradeApp.exe</outfile>
-  <errTitle></errTitle>
+  <jar>../../dist/GradeApp.jar</jar>
+  <outfile>../../dist/GradeApp.exe</outfile>
+  <errTitle>You must install the Java Runtime (JRE) to use GradeApp</errTitle>
   <cmdLine></cmdLine>
   <chdir></chdir>
   <priority>normal</priority>
