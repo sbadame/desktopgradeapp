@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.border.TitledBorder;
 
 /**
@@ -21,6 +20,7 @@ import javax.swing.border.TitledBorder;
 public class GradeApp extends javax.swing.JFrame {
 
     /** Creates new form GradeApp */
+
     public GradeApp() {
         initComponents();
     }
@@ -42,10 +42,12 @@ public class GradeApp extends javax.swing.JFrame {
         noiseSliderPanel = new javax.swing.JPanel();
         noiseSlider = new javax.swing.JSlider();
         graphPanel = new javax.swing.JPanel();
+        gRender = new gradeapp.GRender();
         helpButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Work Doer");
 
         loadButton.setText("Load *.xls");
         loadButton.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +56,7 @@ public class GradeApp extends javax.swing.JFrame {
             }
         });
 
+        emailButton.setForeground(new java.awt.Color(0, 0, 255));
         emailButton.setText("Email");
         emailButton.setEnabled(false);
         emailButton.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +67,11 @@ public class GradeApp extends javax.swing.JFrame {
 
         printButton.setText("Print");
         printButton.setEnabled(false);
-        
+        printButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printButtonActionPerformed(evt);
+            }
+        });
 
         goodGradePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Good Grade - " + Graph.DEFAULT_GOODGRADE));
 
@@ -82,17 +89,17 @@ public class GradeApp extends javax.swing.JFrame {
         goodGradePanelLayout.setHorizontalGroup(
             goodGradePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(goodGradePanelLayout.createSequentialGroup()
-                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
+                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
                 .addContainerGap())
         );
         goodGradePanelLayout.setVerticalGroup(
             goodGradePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(goodGradePanelLayout.createSequentialGroup()
-                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        noiseSliderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Noise - " + Graph.DEFAULT_NOISE));
+        noiseSliderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Noise - " + Graph.DEFAULT_NOISE + "%"));
 
         noiseSlider.setValue((int)(Graph.DEFAULT_NOISE*100));
         noiseSlider.setEnabled(false);
@@ -107,13 +114,13 @@ public class GradeApp extends javax.swing.JFrame {
         noiseSliderPanelLayout.setHorizontalGroup(
             noiseSliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(noiseSliderPanelLayout.createSequentialGroup()
-                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE)
+                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
                 .addContainerGap())
         );
         noiseSliderPanelLayout.setVerticalGroup(
             noiseSliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(noiseSliderPanelLayout.createSequentialGroup()
-                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -121,11 +128,13 @@ public class GradeApp extends javax.swing.JFrame {
         graphPanel.setLayout(graphPanelLayout);
         graphPanelLayout.setHorizontalGroup(
             graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 812, Short.MAX_VALUE)
+            .addComponent(gRender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
         );
         graphPanelLayout.setVerticalGroup(
             graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 269, Short.MAX_VALUE)
+            .addGroup(graphPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(gRender, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
         );
 
         helpButton.setText("Help!");
@@ -161,7 +170,7 @@ public class GradeApp extends javax.swing.JFrame {
                         .addComponent(printButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(saveButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 487, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 641, Short.MAX_VALUE)
                         .addComponent(helpButton)))
                 .addContainerGap())
         );
@@ -189,9 +198,12 @@ public class GradeApp extends javax.swing.JFrame {
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         JFileChooser fc = new JFileChooser();
+        if (fc.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
+            return;
         File input = fc.getSelectedFile();
         try {
             Graph.createGraph(input);
+            gRender.render();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GradeApp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -203,38 +215,47 @@ public class GradeApp extends javax.swing.JFrame {
         saveButton.setEnabled(true);
         printButton.setEnabled(true);
         noiseSlider.setEnabled(true);
+        gradeSlider.setMaximum(Graph.getGraph().getAnswerkey().size());
         gradeSlider.setEnabled(true);// TODO add your handling code here:
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
-        HelpShower.showHelp();
+        HelperButton.createAndShowGUI();
     }//GEN-LAST:event_helpButtonActionPerformed
 
     private void gradeSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_gradeSliderStateChanged
-
-        Graph.getGraph().setGoodgrade(gradeSlider.getValue());   // TODO add your handling code hs......ere:
+        Graph.getGraph().setGoodgrade(gradeSlider.getValue());   
         String title = "Good Grade - ";
-        ((TitledBorder)goodGradePanel.getBorder()).setTitle(title + gradeSlider.getValue());
+        ((TitledBorder)goodGradePanel.getBorder()).setTitle(title + gradeSlider.getValue() + "/" + Graph.getGraph().getAnswerkey().size());
         goodGradePanel.repaint();
+        gRender.render();
     }//GEN-LAST:event_gradeSliderStateChanged
 
     private void noiseSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_noiseSliderStateChanged
-        Graph.getGraph().setNoise(noiseSlider.getValue());
+        Graph.getGraph().setNoise(noiseSlider.getValue()/100.0f);
         String title = "Noise - ";
-        ((TitledBorder)noiseSliderPanel.getBorder()).setTitle(title + noiseSlider.getValue());// TODO add your handling code here:
+        ((TitledBorder)noiseSliderPanel.getBorder()).setTitle(title + noiseSlider.getValue() + "%");
         noiseSliderPanel.repaint();
+        gRender.render();
     }//GEN-LAST:event_noiseSliderStateChanged
 
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        // TODO add your handling code here:
+        GraphSave.saveImage(gRender);
     }//GEN-LAST:event_saveButtonActionPerformed
 
-    private void emailButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailButtonActionPerformed
-    EmailSender.sentEmail();
+    private void emailButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        File tmpFile = GraphSave.tempMaker(gRender); //Difiore use this!!!
+        // Thanks gRender private, had to pass in tmpFile
+        // O Well
+        // Its Static so I can pull this shit
+        EmailSender.sentEmail(tmpFile);
+    }                                           
+    
+    private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailButtonActionPerformed
+        GraphPrint.printComponent(graphPanel);
         // TODO add your handling code here:
     }//GEN-LAST:event_emailButtonActionPerformed
-    
 
     /**
     * @param args the command line arguments
@@ -247,13 +268,17 @@ public class GradeApp extends javax.swing.JFrame {
                 //weird property of the "setLocationRelativeTo" method.
                 gradeApp.setLocationRelativeTo(null);
                 gradeApp.setVisible(true);
-                gradeApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                gradeApp.setTitle("The Weeder");
+                gradeApp.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                // Ask User For Confirmation of Close
+             
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton emailButton;
+    private gradeapp.GRender gRender;
     private javax.swing.JPanel goodGradePanel;
     private javax.swing.JSlider gradeSlider;
     private javax.swing.JPanel graphPanel;

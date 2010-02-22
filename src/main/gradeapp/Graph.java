@@ -12,7 +12,7 @@ import java.util.Vector;
 public class Graph {
 
     //Default Arguments
-    public static final float DEFAULT_GOODGRADE = 80;
+    public static final int DEFAULT_GOODGRADE = 0;
     public static final float DEFAULT_NOISE = 0.7f;
 
     /**
@@ -33,8 +33,8 @@ public class Graph {
     // ---- End static stuff, all classes from here -------------------------
     
     //Default settings
-    private float goodgrade = 80; 
-    private float noise = 0.7f;
+    private int goodgrade = DEFAULT_GOODGRADE;
+    private float noise = DEFAULT_NOISE;
     private Vector<Vector<Character>> grades = new Vector<Vector<Character>>();
     private Vector<Character> answerkey = new Vector<Character>();
     private MinedTree tree;
@@ -52,20 +52,35 @@ public class Graph {
     }
 
     private void BootheAlgo(){
-
+        ///UGHGHG BOOTHE!!!! Converting from Vector<Vector<Charactor>> to
+        //Vector<String[]> like Boothe wants.
+        Vector<String[]> students = new Vector<String[]>();
+        for (Vector<Character> student : grades) {
+            String[] s = new String[student.size()];
+            for (int i = 0; i < student.size(); i++) {
+                s[i] = String.valueOf(student.get(i));
+            }
+            students.add(s);
+        }
+        String[] ans = new String[answerkey.size()];
+        for (int i = 0; i < ans.length; i++) {
+            ans[i] = String.valueOf(answerkey.get(i));
+        }
+        tree = new MinedTree(getNoise(), getGoodgrade(), ans, students);
     }
+
 
     /**
      * @return the goodgrade
      */
-    public float getGoodgrade() {
+    public int getGoodgrade() {
         return goodgrade;
     }
 
     /**
      * @param goodgrade the goodgrade to set
      */
-    public void setGoodgrade(float goodgrade) {
+    public void setGoodgrade(int goodgrade) {
         this.goodgrade = goodgrade;
         BootheAlgo();
     }

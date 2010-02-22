@@ -11,21 +11,27 @@
     <!-- build the program -->
     <target name="build" depends="compile,test" />
 
-    <!-- Create Jar Files -->
-    <target name="jar" depends="compile" description="Builds the jar'd version of GradeApp">
+    <!-- Create final Deliverable -->
+    <target name="dist" depends="compile" description="Builds the jar'd version of GradeApp">
 	<mkdir dir="dist" />
+	<mkdir dir="dist/lib" />
 	<jar jarfile="dist/GradeApp.jar" index="true">
 	    <fileset dir="bin/main"/>
 	    <manifest>
-		<attribute name="Implementation-Vendor" value="Software Engineering 'Desktop Application' Group"/>
+		<attribute name="Implementation-Vendor" value="Desktop Application Group"/>
 		<attribute name="Main-Class" value="gradeapp.GradeApp" />
+		<attribute name="Class-Path" value="lib/jgraph.jar lib/junit-4.6.jar lib/mail.jar lib/poi-3.6-20091214.jar" />
 	    </manifest>
 	</jar>
+	<copy todir="dist">
+	    <path refid="lib.path"/>
+	</copy>
     </target>
 
     <!-- Basic simple clean target -->
     <target name="clean">
         <delete dir="bin"/>
+        <delete dir="dist"/>
     </target>
 
     <!-- make our binaries -->
@@ -83,6 +89,16 @@
         </target>
     -->
  
+        <target name="example-boothe" depends="build">
+          <java fork="true" classname="boothe.BootheAlgo" >
+            <arg value="sampledata/boothesample.txt" />
+            <classpath>
+                <path refid="lib.path"/>
+                <path location="bin/main"/>
+                <path location="bin/examples"/>
+            </classpath>
+          </java>
+        </target>
     <!-- Example program that explores some HSSF excel magic
      You probably want to read the source first to see what it does -->
     <target name="example-excel" depends="build">
@@ -154,14 +170,15 @@
 
     <!-- Build exe for Windows, Lifted from: http://launch4j.sourceforge.net/docs.html -->
     <taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="lib/launch4j/launch4j.jar:lib/launch4j/xstream.jar"/>
-    <target name="build-windows" depends="jar">
+    <target name="build-windows" depends="dist">
 	<mkdir dir="dist/windows"/>
 	<launch4j configFile="lib/launch4j/gradeappconfig.xml" />
     </target>
 
     <!-- Use this target to bring up the GUI used to the edit the gradeappconfig.xml -->
     <target name="config-windows">
-	<java jar="lib/launch4j/launch4j.jar" fork="true" />
+	<java jar="lib/launch4j/launch4j.jar" fork="true">
+	</java>
     </target>	
 
 </project>

@@ -37,6 +37,7 @@ public class GRender extends JPanel{
         model = new DefaultGraphModel();
         view = new GraphLayoutCache(model, new DefaultCellViewFactory());
         graph = new JGraph(model, view);
+        graph.setAntiAliased(true);
 
         //Configure our layout
         layout = new JGraphTreeLayout();
@@ -60,12 +61,10 @@ public class GRender extends JPanel{
     }
 
     public void render(MinedTree tree){
-        //If the graph is already displaying a tree, then render it
-        if (root !=  null)
-           graph.getGraphLayoutCache().remove(new Object[]{root}, true, true);
+        graph.setModel(new DefaultGraphModel());//Clear the tree by replacing
+                                                //the model with a blank new one
 
-
-        ArrayList<DefaultGraphCell> cells = buildCellsFromTree(tree);
+        ArrayList<DefaultGraphCell> cells = buildCellsFromTree(tree, true);
         root = cells.get(0);
 
         //Add the new tree
@@ -86,16 +85,16 @@ public class GRender extends JPanel{
      * @param tree
      * @return
      */
-    private ArrayList<DefaultGraphCell> buildCellsFromTree(MinedTree tree){
+    private ArrayList<DefaultGraphCell> buildCellsFromTree(MinedTree tree, boolean gotItCorrect){
         ArrayList<DefaultGraphCell> cells = new ArrayList<DefaultGraphCell>();
-        DefaultGraphCell cell = getCell(tree);
+        DefaultGraphCell cell = getCell(tree, gotItCorrect);
         DefaultPort port = new DefaultPort();
         cell.add(port);
         cells.add(cell);
 
         if (tree.right != null && tree.wrong != null) {
-            ArrayList<DefaultGraphCell> wrongCells = buildCellsFromTree(tree.wrong);
-            ArrayList<DefaultGraphCell> rightCells = buildCellsFromTree(tree.right);
+            ArrayList<DefaultGraphCell> wrongCells = buildCellsFromTree(tree.wrong, false);
+            ArrayList<DefaultGraphCell> rightCells = buildCellsFromTree(tree.right, true);
             cells.addAll(wrongCells);
             cells.addAll(rightCells);
             cells.add(getEdge(cell, wrongCells.get(0)));
@@ -111,15 +110,28 @@ public class GRender extends JPanel{
         edge.setTarget(target.getChildAt(0));
         GraphConstants.setLineEnd(edge.getAttributes(), GraphConstants.ARROW_CLASSIC); 
         GraphConstants.setEndFill(edge.getAttributes(), true);
+        GraphConstants.setEditable(edge.getAttributes(), false);
         return edge;
     }
 
-    private DefaultGraphCell getCell(MinedTree tree){
-       DefaultGraphCell cell = new DefaultGraphCell(tree.message);
+    private DefaultGraphCell getCell(MinedTree tree, boolean gotItCorrect){
+        String s = "";
+        if (tree.question != -1) {
+            s = "They got question " + tree.question + (gotItCorrect ? " right" : " wrong");
+            s+= tree.count(true, tree.students) + "/" + tree.students.size() + " good\n";
+            s+= tree.count(false, tree.students) + "/" + tree.students.size() + " bad";
+        }else{
+            s = gotItCorrect ? " right" : " wrong\n";
+            s+= tree.count(true, tree.students) + "/" + tree.students.size() + " good\n";
+            s+= tree.count(false, tree.students) + "/" + tree.students.size() + " bad";
+        }
+        DefaultGraphCell cell = new DefaultGraphCell(s);
         GraphConstants.setBounds(cell.getAttributes(), new Rectangle2D.Double(140,140,40,20));
-       GraphConstants.setGradientColor(cell.getAttributes(), Color.ORANGE);
-       GraphConstants.setOpaque(cell.getAttributes(), true);
-       return cell;
+        GraphConstants.setGradientColor(cell.getAttributes(), Color.ORANGE);
+        GraphConstants.setOpaque(cell.getAttributes(), true);
+        GraphConstants.setAutoSize(cell.getAttributes(), true);
+        GraphConstants.setEditable(cell.getAttributes(), false);
+        return cell;
     }
 
 }

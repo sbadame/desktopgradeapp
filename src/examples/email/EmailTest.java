@@ -33,6 +33,7 @@ public class EmailTest {
         Properties props = new Properties();
         props.put("mail.smtps.host", "smtp.gmail.com");
         props.put("mail.smtps.auth", "true");
+        props.put("mail.smtp.port", "25");
         Session session = Session.getInstance(props, null);
         try {
 

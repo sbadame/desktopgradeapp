@@ -1,27 +1,15 @@
 package graph;
 
-import gradeapp.GRender;
-import gradeapp.MinedTree;
 import javax.swing.JFrame;
 
+/**
+ * With the boothe algorithm, this code is now useless
+ * @author Sandro Badame <a href="mailto:s.badame@gmail.com">s.badame&amp;gmail.com</a>
+ */
 public class GRenderExample extends JFrame{
 
     public GRenderExample(){
         super("Example");
-        GRender gr = new GRender();
-        MinedTree root = new MinedTree("root");
-        root.right = new MinedTree("right");
-        root.wrong = new MinedTree("wrong");
-
-        root.right.right = new MinedTree("Sandro");
-        root.right.wrong = new MinedTree("Badame");
-
-        root.wrong.right = new MinedTree("Do");
-        root.wrong.wrong = new MinedTree("Work");
-
-
-        gr.render(root);
-        setContentPane(gr);
 
     }
 
