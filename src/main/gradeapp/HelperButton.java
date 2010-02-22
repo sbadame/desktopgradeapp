@@ -48,6 +48,7 @@ public class HelperButton extends JPanel{
         customDialog2 = new CustomDialog2(frame, "geisel", this);
         customDialog2.pack();
 
+
         //Create the components.
         JPanel frequentPanel = createSimpleDialogBox();
 
@@ -112,8 +113,10 @@ public class HelperButton extends JPanel{
         radioButtons[0] = new JRadioButton("How to Upload a File.");
         radioButtons[0].setActionCommand(defaultMessageCommand);
 
+
         radioButtons[1] = new JRadioButton("How to Display the Tree.");
         radioButtons[1].setActionCommand(displayTree);
+
 
         radioButtons[2] = new JRadioButton("How to Email the Tree.");
         radioButtons[2].setActionCommand(emailTree);
@@ -212,7 +215,16 @@ public class HelperButton extends JPanel{
     public static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("Help Menu");
+        frame.setSize(400, 300);
+
         frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Dimension dim = toolkit.getScreenSize();
+
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(true);
+
 
 
         //Create and set up the content pane.
