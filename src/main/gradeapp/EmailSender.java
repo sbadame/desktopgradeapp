@@ -21,6 +21,27 @@ import java.io.File;
 /**
  *
  * @author DiFiore
+ * Doesnt Return Anything. Asks The User For Email Address To
+ * Send Email To. Gets The Temp File From Temp File Function. Tmp 
+ * File Is Rendered Graph. Email Is Sent From GMail Account. The Hosts
+ * Are Set Up. The Email Title And Subject With Attachment Is Created.
+ * The Account Is Logged Into And The Email is Sent. A Progress Bar Will Show
+ * Progress And A Message Will Pop Up For Errors If An Error Occurs. A 
+ * Confirmation Message Is Outputted If All Goes Well.
+ * 
+ * Variables:
+ * 
+ * to Email Address To Send Email
+ * from Email Address Where Data Is Sent From
+ * host The Host Of Email Server
+ * msgText1 Text Of Email
+ * subject Subject Of Email
+ * jfrProgrss JFrame That Holds Progress Bar
+ * progressBar Progress Bar Itself
+ * progress Overall Progress Level
+ * props Instance Of Properties Class Does Work
+ * doing String Of Current Event That Is Being Done
+ * i Counter Of Needed Wait Loop
  */
 // Most of Code Ripped From:
 // http://www.java-tips.org/other-api-tips/javamail/how-to-send-an-email-with-a-file-attachment.html
@@ -83,6 +104,14 @@ public static void sentEmail(File tmpFile){
   props.put("mail.smtp.port", "25");
   Session session = Session.getInstance(props, null);
 
+  // Fen BootLeg Java Wait 
+  // Needed For Gay Progress Bar Cosmetic Look
+  // Else User Says WTF
+  for (int i = 0; i < 1500000000; i++)
+  {
+      ;
+  }
+
   // Progress ++;
   progressBar.setValue(33);
   doing = "Step 2 - Creating Email.";
@@ -120,6 +149,14 @@ public static void sentEmail(File tmpFile){
 
       // Set the Date: header
       msg.setSentDate(new Date());
+
+      // Fen BootLeg Java Wait
+      // Needed For Gay Progress Bar Cosmetic Look
+      // Else User Says WTF
+      for (int i = 0; i < 1500000000; i++)
+      {
+        ;
+      }
 
       // Progress ++;
       progressBar.setValue(66);
