@@ -1,6 +1,5 @@
 package gradeapp;
 
-import com.jgraph.components.labels.MultiLineVertexView;
 import com.jgraph.layout.JGraphFacade;
 import com.jgraph.layout.tree.JGraphTreeLayout;
 import java.awt.Color;
@@ -20,7 +19,6 @@ import org.jgraph.graph.DefaultGraphModel;
 import org.jgraph.graph.DefaultPort;
 import org.jgraph.graph.GraphConstants;
 import org.jgraph.graph.GraphLayoutCache;
-import org.jgraph.graph.VertexView;
 
 /**
  * Holds a JGraph and does work on it
