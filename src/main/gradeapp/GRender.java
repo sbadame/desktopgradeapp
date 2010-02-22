@@ -3,6 +3,7 @@ package gradeapp;
 import com.jgraph.layout.JGraphFacade;
 import com.jgraph.layout.tree.JGraphTreeLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
@@ -104,7 +105,7 @@ public class GRender extends JPanel{
        return cells;
     }
 
-    private DefaultEdge getEdge(DefaultGraphCell source, DefaultGraphCell target){
+    protected DefaultEdge getEdge(DefaultGraphCell source, DefaultGraphCell target){
         DefaultEdge edge = new DefaultEdge();
         edge.setSource(source.getChildAt(0));
         edge.setTarget(target.getChildAt(0));
@@ -114,7 +115,7 @@ public class GRender extends JPanel{
         return edge;
     }
 
-    private DefaultGraphCell getCell(MinedTree tree, boolean gotItCorrect){
+    protected DefaultGraphCell getCell(MinedTree tree, boolean gotItCorrect){
         String s = "";
         if (tree.question != -1) {
             s = "They got question " + tree.question + (gotItCorrect ? " right" : " wrong");
@@ -134,4 +135,7 @@ public class GRender extends JPanel{
         return cell;
     }
 
+    public Component getGraph(){
+        return graph;
+    }
 }

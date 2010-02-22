@@ -241,11 +241,11 @@ public class GradeApp extends javax.swing.JFrame {
 
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        GraphSave.saveImage(gRender);
+        GraphSave.saveImage(gRender.getGraph());
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void emailButtonActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        File tmpFile = GraphSave.tempMaker(gRender); //Difiore use this!!!
+        File tmpFile = GraphSave.tempMaker(gRender.getGraph());
         // Thanks gRender private, had to pass in tmpFile
         // O Well
         // Its Static so I can pull this shit
@@ -253,7 +253,7 @@ public class GradeApp extends javax.swing.JFrame {
     }                                           
     
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailButtonActionPerformed
-        GraphPrint.printComponent(graphPanel);
+        GraphPrint.printComponent(gRender.getGraph());
         // TODO add your handling code here:
     }//GEN-LAST:event_emailButtonActionPerformed
 
