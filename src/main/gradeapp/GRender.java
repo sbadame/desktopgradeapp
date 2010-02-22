@@ -38,7 +38,7 @@ public class GRender extends JPanel{
     public GRender(){
         //Make a graph
         model = new DefaultGraphModel();
-        view = new GraphLayoutCache(model, new GRenderCellFactory());
+        view = new GraphLayoutCache(model, new DefaultCellViewFactory());
         graph = new JGraph(model, view);
         graph.setAntiAliased(true);
 
@@ -143,6 +143,4 @@ public class GRender extends JPanel{
         return graph;
     }
 
-    class GRenderCellFactory extends DefaultCellViewFactory{
-    }
 }
