@@ -1,5 +1,6 @@
 package gradeapp;
 
+import com.jgraph.components.labels.MultiLineVertexView;
 import com.jgraph.layout.JGraphFacade;
 import com.jgraph.layout.tree.JGraphTreeLayout;
 import java.awt.Color;
@@ -19,6 +20,7 @@ import org.jgraph.graph.DefaultGraphModel;
 import org.jgraph.graph.DefaultPort;
 import org.jgraph.graph.GraphConstants;
 import org.jgraph.graph.GraphLayoutCache;
+import org.jgraph.graph.VertexView;
 
 /**
  * Holds a JGraph and does work on it
@@ -36,7 +38,7 @@ public class GRender extends JPanel{
     public GRender(){
         //Make a graph
         model = new DefaultGraphModel();
-        view = new GraphLayoutCache(model, new DefaultCellViewFactory());
+        view = new GraphLayoutCache(model, new GRenderCellFactory());
         graph = new JGraph(model, view);
         graph.setAntiAliased(true);
 
@@ -116,16 +118,18 @@ public class GRender extends JPanel{
     }
 
     protected DefaultGraphCell getCell(MinedTree tree, boolean gotItCorrect){
-        String s = "";
+        String s = "<HTML>";
         if (tree.question != -1) {
-            s = "They got question " + tree.question + (gotItCorrect ? " right" : " wrong");
-            s+= tree.count(true, tree.students) + "/" + tree.students.size() + " good\n";
-            s+= tree.count(false, tree.students) + "/" + tree.students.size() + " bad";
-        }else{
-            s = gotItCorrect ? " right" : " wrong\n";
-            s+= tree.count(true, tree.students) + "/" + tree.students.size() + " good\n";
-            s+= tree.count(false, tree.students) + "/" + tree.students.size() + " bad";
+            s+= "They got question " + tree.question + (gotItCorrect ? " right" : " wrong") + "<BR>";
         }
+        int good = tree.count(true, tree.students);
+        int total = tree.students.size();
+        int bad = total-good;
+        int goodPercent = (int)(((float)good/total)*100);
+        s += "Bad grade (" + bad + "/" + total+ "=" + goodPercent + "%)";
+        s += "<BR>";
+        s += "Good grade (" + good + "/" + total + "=" + (100-goodPercent) +"%)";
+        s += "</HTML>";
         DefaultGraphCell cell = new DefaultGraphCell(s);
         GraphConstants.setBounds(cell.getAttributes(), new Rectangle2D.Double(140,140,40,20));
         GraphConstants.setGradientColor(cell.getAttributes(), Color.ORANGE);
@@ -137,5 +141,8 @@ public class GRender extends JPanel{
 
     public Component getGraph(){
         return graph;
+    }
+
+    class GRenderCellFactory extends DefaultCellViewFactory{
     }
 }

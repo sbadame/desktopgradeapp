@@ -204,6 +204,13 @@ public class GradeApp extends javax.swing.JFrame {
         try {
             Graph.createGraph(input);
             gRender.render();
+            emailButton.setEnabled(true);
+            saveButton.setEnabled(true);
+            printButton.setEnabled(true);
+            noiseSlider.setEnabled(true);
+            gradeSlider.setMaximum(Graph.getGraph().getAnswerkey().size());
+            gradeSlider.setValue((int) (Graph.getGraph().getAnswerkey().size() * 0.8f));
+            gradeSlider.setEnabled(true);// TODO add your handling code here:
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GradeApp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -211,12 +218,6 @@ public class GradeApp extends javax.swing.JFrame {
         } catch (GraphFormatException ex) {
             Logger.getLogger(GradeApp.class.getName()).log(Level.SEVERE, null, ex);
         }
-        emailButton.setEnabled(true);
-        saveButton.setEnabled(true);
-        printButton.setEnabled(true);
-        noiseSlider.setEnabled(true);
-        gradeSlider.setMaximum(Graph.getGraph().getAnswerkey().size());
-        gradeSlider.setEnabled(true);// TODO add your handling code here:
     }//GEN-LAST:event_loadButtonActionPerformed
 
     private void helpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpButtonActionPerformed
@@ -254,7 +255,6 @@ public class GradeApp extends javax.swing.JFrame {
     
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailButtonActionPerformed
         GraphPrint.printComponent(gRender.getGraph());
-        // TODO add your handling code here:
     }//GEN-LAST:event_emailButtonActionPerformed
 
     /**

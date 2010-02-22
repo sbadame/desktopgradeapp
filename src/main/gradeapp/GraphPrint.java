@@ -1,13 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gradeapp;
 
 /**
  *use by calling it as follows: GraphPrint.printComponent(componentToBePrinted)
- * @author sandro
+ * @author Andres
  */
 import java.awt.*;
 import javax.swing.*;
