@@ -137,7 +137,7 @@ public class GRender extends JPanel{
         return cell;
     }
 
-    public Component getGraph(){
+    public JGraph getGraph(){
         return graph;
     }
 
