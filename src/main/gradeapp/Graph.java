@@ -11,9 +11,9 @@ import java.util.Vector;
  */
 public class Graph {
 
-    //Default Arguments
+//Default Arguments
     public static final int DEFAULT_GOODGRADE = 0;
-    public static final float DEFAULT_NOISE = 0.7f;
+    public static final float DEFAULT_NOISE = 0.15f;
 
     /**
      * The singleton instance of the graph

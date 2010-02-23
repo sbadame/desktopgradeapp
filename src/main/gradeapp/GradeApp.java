@@ -43,11 +43,13 @@ public class GradeApp extends javax.swing.JFrame {
         noiseSlider = new javax.swing.JSlider();
         graphPanel = new javax.swing.JPanel();
         gRender = new gradeapp.GRender();
+        scaleSlider = new javax.swing.JSlider();
+        jLabel1 = new javax.swing.JLabel();
         helpButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Work Doer");
+        setTitle("The Weeder");
 
         loadButton.setText("Load *.xls");
         loadButton.addActionListener(new java.awt.event.ActionListener() {
@@ -67,11 +69,6 @@ public class GradeApp extends javax.swing.JFrame {
 
         printButton.setText("Print");
         printButton.setEnabled(false);
-        printButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printButtonActionPerformed(evt);
-            }
-        });
 
         goodGradePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Good Grade - " + Graph.DEFAULT_GOODGRADE));
 
@@ -89,7 +86,7 @@ public class GradeApp extends javax.swing.JFrame {
         goodGradePanelLayout.setHorizontalGroup(
             goodGradePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(goodGradePanelLayout.createSequentialGroup()
-                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
+                .addComponent(gradeSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 991, Short.MAX_VALUE)
                 .addContainerGap())
         );
         goodGradePanelLayout.setVerticalGroup(
@@ -99,7 +96,7 @@ public class GradeApp extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        noiseSliderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Noise - " + Graph.DEFAULT_NOISE + "%"));
+        noiseSliderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Quality - " + (int)(Graph.DEFAULT_NOISE*100) + "%"));
 
         noiseSlider.setValue((int)(Graph.DEFAULT_NOISE*100));
         noiseSlider.setEnabled(false);
@@ -114,7 +111,7 @@ public class GradeApp extends javax.swing.JFrame {
         noiseSliderPanelLayout.setHorizontalGroup(
             noiseSliderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(noiseSliderPanelLayout.createSequentialGroup()
-                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
+                .addComponent(noiseSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 991, Short.MAX_VALUE)
                 .addContainerGap())
         );
         noiseSliderPanelLayout.setVerticalGroup(
@@ -124,17 +121,39 @@ public class GradeApp extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        scaleSlider.setOrientation(javax.swing.JSlider.VERTICAL);
+        scaleSlider.setPaintLabels(true);
+        scaleSlider.setPaintTicks(true);
+        scaleSlider.setValue(100);
+        scaleSlider.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                scaleSliderStateChanged(evt);
+            }
+        });
+
+        jLabel1.setText("Zoom");
+
         javax.swing.GroupLayout graphPanelLayout = new javax.swing.GroupLayout(graphPanel);
         graphPanel.setLayout(graphPanelLayout);
         graphPanelLayout.setHorizontalGroup(
             graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gRender, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 889, Short.MAX_VALUE)
+            .addGroup(graphPanelLayout.createSequentialGroup()
+                .addGroup(graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(scaleSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(gRender, javax.swing.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE))
         );
         graphPanelLayout.setVerticalGroup(
             graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(graphPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(gRender, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, graphPanelLayout.createSequentialGroup()
+                .addGroup(graphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(gRender, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, graphPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(scaleSlider, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         helpButton.setText("Help!");
@@ -208,6 +227,7 @@ public class GradeApp extends javax.swing.JFrame {
             saveButton.setEnabled(true);
             printButton.setEnabled(true);
             noiseSlider.setEnabled(true);
+            noiseSlider.setValue((int)(Graph.getGraph().getNoise()*100));
             gradeSlider.setMaximum(Graph.getGraph().getAnswerkey().size());
             gradeSlider.setValue((int) (Graph.getGraph().getAnswerkey().size() * 0.8f));
             gradeSlider.setEnabled(true);// TODO add your handling code here:
@@ -257,6 +277,11 @@ public class GradeApp extends javax.swing.JFrame {
         GraphPrint.printComponent(gRender.getGraph());
     }//GEN-LAST:event_emailButtonActionPerformed
 
+    private void scaleSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_scaleSliderStateChanged
+        int c = scaleSlider.getValue();
+        gRender.getGraph().setScale(c/100.0);
+    }//GEN-LAST:event_scaleSliderStateChanged
+
     /**
     * @param args the command line arguments
     */
@@ -283,11 +308,13 @@ public class GradeApp extends javax.swing.JFrame {
     private javax.swing.JSlider gradeSlider;
     private javax.swing.JPanel graphPanel;
     private javax.swing.JButton helpButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loadButton;
     private javax.swing.JSlider noiseSlider;
     private javax.swing.JPanel noiseSliderPanel;
     private javax.swing.JButton printButton;
     private javax.swing.JButton saveButton;
+    private javax.swing.JSlider scaleSlider;
     // End of variables declaration//GEN-END:variables
 
 }

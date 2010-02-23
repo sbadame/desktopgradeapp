@@ -124,9 +124,9 @@ public class GRender extends JPanel{
         int total = tree.students.size();
         int bad = total-good;
         int goodPercent = (int)(((float)good/total)*100);
-        s += "Bad grade (" + bad + "/" + total+ "=" + goodPercent + "%)";
+        s += "Bad grade (" + bad + "/" + total+ "=" + (100-goodPercent) + "%)";
         s += "<BR>";
-        s += "Good grade (" + good + "/" + total + "=" + (100-goodPercent) +"%)";
+        s += "Good grade (" + good + "/" + total + "=" + (goodPercent) +"%)";
         s += "</HTML>";
         DefaultGraphCell cell = new DefaultGraphCell(s);
         GraphConstants.setBounds(cell.getAttributes(), new Rectangle2D.Double(140,140,40,20));
@@ -137,7 +137,7 @@ public class GRender extends JPanel{
         return cell;
     }
 
-    public Component getGraph(){
+    public JGraph getGraph(){
         return graph;
     }
 
