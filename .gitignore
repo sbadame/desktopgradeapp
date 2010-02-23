@@ -1,4 +1,5 @@
 *.ps
+*.zip
 *.patch
 bin/*
 ./*.xls
