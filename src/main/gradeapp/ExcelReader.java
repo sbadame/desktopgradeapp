@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.String;
 import java.util.Vector;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -29,11 +30,14 @@ public class ExcelReader{
 
         for(int i=7; i <= 7+QNum-1; i++){
             HSSFCell keyCell = KeyRow.getCell(i);
-            key.add(keyCell.getRichStringCellValue().getString().charAt(0));
+            char tempKey;
+            tempKey = Character.toUpperCase(keyCell.getRichStringCellValue().getString().charAt(0));
+            key.add(tempKey);
         }
 
         for(int j=4; j < rowCount-3; j++){
                 Vector<Character> studAns = new Vector<Character>();
+                char tempStudAns;
                 HSSFRow studRow = MainSheet.getRow(j);
                 for(int k=7; k<=(7+QNum-1); k++){
                     HSSFCell studCell = studRow.getCell(k);
@@ -41,7 +45,8 @@ public class ExcelReader{
                         studAns.add(' ');
                     }
                     else{
-                        studAns.add(studCell.getRichStringCellValue().getString().charAt(0));
+                        tempStudAns = Character.toUpperCase(studCell.getRichStringCellValue().getString().charAt(0));
+                        studAns.add(tempStudAns);
                     }
                 }
                 students.add(studAns);
