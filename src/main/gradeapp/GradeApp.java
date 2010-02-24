@@ -69,6 +69,11 @@ public class GradeApp extends javax.swing.JFrame {
 
         printButton.setText("Print");
         printButton.setEnabled(false);
+        printButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printButtonActionPerformed(evt);
+            }
+        });
 
         goodGradePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Good Grade - " + Graph.DEFAULT_GOODGRADE));
 
@@ -275,7 +280,7 @@ public class GradeApp extends javax.swing.JFrame {
     
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailButtonActionPerformed
         GraphPrint.printComponent(gRender.getGraph());
-    }//GEN-LAST:event_emailButtonActionPerformed
+    }//GEN-LAST:event_printButtonActionPerformed
 
     private void scaleSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_scaleSliderStateChanged
         int c = scaleSlider.getValue();
