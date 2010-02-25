@@ -1,5 +1,7 @@
 package graph;
 
+import org.jgraph.JGraph;
+
 import gradeapp.GraphPrint;
 
 public class PrintTest {
