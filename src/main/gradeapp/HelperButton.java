@@ -80,8 +80,7 @@ public class HelperButton extends JPanel{
     }
 
      private JPanel createSimpleDialogBox() {
-        final int numButtons = 7;
-        JRadioButton[] radioButtons = new JRadioButton[numButtons];
+        JRadioButton[] radioButtons = new JRadioButton[5];
         final ButtonGroup group = new ButtonGroup();
 
         JButton showItButton = null;
@@ -111,7 +110,7 @@ public class HelperButton extends JPanel{
         radioButtons[4] = new JRadioButton("Contact Info");
         radioButtons[4].setActionCommand(contactInfo);
         
-        for (int i = 0; i < numButtons; i++) {
+        for (int i = 0; i < radioButtons.length; i++) {
             group.add(radioButtons[i]);
         }
 
@@ -170,12 +169,12 @@ public class HelperButton extends JPanel{
 
         int numChoices = radioButtons.length;
         JPanel box = new JPanel();
-        JLabel label = new JLabel(description);
+        JLabel label2 = new JLabel(description);
 
         box.setLayout(new BoxLayout(box, BoxLayout.PAGE_AXIS));
-        box.add(label);
+        box.add(label2);
 
-        for (int i = 0; i < numChoices; i++) {
+        for (int i = 0; i < radioButtons.length; i++) {
             box.add(radioButtons[i]);
         }
 

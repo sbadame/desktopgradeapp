@@ -2,12 +2,12 @@ package gradeapp;
 
 import com.jgraph.layout.JGraphFacade;
 import com.jgraph.layout.tree.JGraphTreeLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.GridLayout;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Map;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
@@ -21,19 +21,33 @@ import org.jgraph.graph.GraphConstants;
 import org.jgraph.graph.GraphLayoutCache;
 
 /**
- * Holds a JGraph and does work on it
+ * A Panel that conains a JScrollPane that contains a JGraph.
+ * This holds all of the details of how the Graph is rendered.
+ * In the context of this program it is mostly used by
+ * {@link GradeApp}
  * @author sandro
  */
 public class GRender extends JPanel{
-    
-    JGraph graph;
-    DefaultGraphModel model;
-    GraphLayoutCache view;
-    DefaultGraphCell root;
-    JGraphFacade facade;
-    JGraphTreeLayout layout;
 
+    private static final String GRAPH = "Graph";
+    private static final String LOAD = "Load";
+
+    private CardLayout swingLayout = new CardLayout();
+
+    private JGraph graph;
+    private DefaultGraphModel model;
+    private GraphLayoutCache view;
+    private DefaultGraphCell root;
+    private JGraphFacade facade;
+    private JGraphTreeLayout graphLayout;
+
+    /**
+     * Returns an instance where the JGraph is blank.
+     */
     public GRender(){
+        super();
+
+
         //Make a graph
         model = new DefaultGraphModel();
         view = new GraphLayoutCache(model, new DefaultCellViewFactory());
@@ -41,14 +55,20 @@ public class GRender extends JPanel{
         graph.setAntiAliased(true);
 
         //Configure our layout
-        layout = new JGraphTreeLayout();
-        layout.setAlignment(SwingConstants.TOP);
-        layout.setOrientation(SwingConstants.NORTH);
-        layout.setCombineLevelNodes(false);
+        graphLayout = new JGraphTreeLayout();
+        graphLayout.setAlignment(SwingConstants.TOP);
+        graphLayout.setOrientation(SwingConstants.NORTH);
+        graphLayout.setCombineLevelNodes(false);
 
         //Add it to our selves
-        setLayout(new GridLayout());
-        add(new JScrollPane(graph));
+        setLayout(swingLayout);
+
+        JLabel loadText = new JLabel("Click on the \"Load *.xls\" button above"+
+                                     " to load a spreadsheet", JLabel.CENTER);
+
+        add(loadText, LOAD);
+        add(new JScrollPane(graph), GRAPH);
+        swingLayout.show(this, LOAD);
     }
 
     public void render(){
@@ -62,6 +82,7 @@ public class GRender extends JPanel{
     }
 
     public void render(MinedTree tree){
+        swingLayout.show(this, GRAPH);
         graph.setModel(new DefaultGraphModel());//Clear the tree by replacing
                                                 //the model with a blank new one
 
@@ -74,7 +95,7 @@ public class GRender extends JPanel{
 
         //Run the layout
         facade = new JGraphFacade(graph, new Object[]{root});
-        layout.run(facade);
+        graphLayout.run(facade);
         Map nested = facade.createNestedMap(true, true);
         graph.getGraphLayoutCache().edit(nested);//Apply the layout's measurements
         repaint();//Repaint!
@@ -118,15 +139,16 @@ public class GRender extends JPanel{
     protected DefaultGraphCell getCell(MinedTree tree, boolean gotItCorrect){
         String s = "<HTML>";
         if (tree.question != -1) {
-            s+= "They got question " + tree.question + (gotItCorrect ? " right" : " wrong") + "<BR>";
+            s+= "If they got question " + tree.question + (gotItCorrect ? " right" : " wrong") + " then<BR>";
         }
         int good = tree.count(true, tree.students);
         int total = tree.students.size();
         int bad = total-good;
         int goodPercent = (int)(((float)good/total)*100);
-        s += "Bad grade (" + bad + "/" + total+ "=" + (100-goodPercent) + "%)";
+        int badPercent = 100 - goodPercent;
+        s += bad + " out of " + total+ " did poorly (" + badPercent + "%)";
         s += "<BR>";
-        s += "Good grade (" + good + "/" + total + "=" + (goodPercent) +"%)";
+        s += good + " out of " + total + " did well (" + goodPercent +"%)";
         s += "</HTML>";
         DefaultGraphCell cell = new DefaultGraphCell(s);
         GraphConstants.setBounds(cell.getAttributes(), new Rectangle2D.Double(140,140,40,20));

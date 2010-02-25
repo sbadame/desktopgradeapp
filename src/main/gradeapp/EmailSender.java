@@ -28,6 +28,7 @@ public class EmailSender {
 
 /**
  * Email Is Sent From GMail Account with an attached file.
+ * Obtains the user's email address through a dialog box.
  * Doesnt Return Anything. Asks The User For Email Address To
  * Send Email To. Gets The Temp File From Temp File Function. Tmp 
  * File Is Rendered Graph. Email Is Sent From GMail Account. The Hosts
@@ -169,7 +170,7 @@ public static void sentEmail(File tmpFile){
        //Close
        jfrProgress.dispose();
 
-       JOptionPane.showMessageDialog(null, "Dear User,\nYour Email Was Successfully Sent.\nSincerely,\nHacker.\n");
+       JOptionPane.showMessageDialog(null, "Email sucessfully sent. Check your inbox!");
 
   }
   catch (MessagingException mex)

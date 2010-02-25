@@ -37,15 +37,15 @@
      </path>
 
     <!-- build the program -->
-    <target name="build" depends="compile,test" description="Builds the jar'd version of GradeApp">
+    <target name="build" depends="-compile,test" description="Builds the jar'd version of GradeApp">
         <mkdir dir="dist" />
         <mkdir dir="dist/lib" />
         <jar jarfile="dist/GradeApp.jar">
             <fileset dir="bin/main" />
             <manifest>
-            <attribute name="Implementation-Vendor" value="Desktop Application Group"/>
-            <attribute name="Main-Class" value="gradeapp.GradeApp" />
-            <attribute name="Class-Path" value="lib/jgraph.jar lib/junit-4.6.jar lib/mail.jar lib/poi-3.6-20091214.jar" />
+		<attribute name="Implementation-Vendor" value="Desktop Application Group"/>
+		<attribute name="Main-Class" value="gradeapp.GradeApp" />
+		<attribute name="Class-Path" value="lib/jgraph.jar lib/junit-4.6.jar lib/mail.jar lib/poi-3.6-20091214.jar" />
             </manifest>
         </jar>
         <copy todir="dist">
@@ -53,8 +53,16 @@
         </copy>
     </target>
 
+    <!-- Create a zip file containing the ditributable binaries -->
+    <target name="-zip" depends="build,build-windows" >
+	<zip destfile="GradeApp.zip">
+	    <zipfileset dir="." includes="README.txt" prefix="GradeApp" />
+	    <zipfileset dir="dist" prefix="GradeApp" />
+	</zip>
+    </target>
+
     <!-- Create final Deliverable -->
-    <target name="dist" depends="build,build-windows" description="Builds the jar'd version of GradeApp">
+    <target name="dist" depends="build,build-windows,-zip" description="Builds the jar'd version of GradeApp">
     </target>
 
     <!-- Basic simple clean target -->
@@ -80,7 +88,7 @@
      </target>
 
     <!-- run junit to test the program -->
-    <target name="test" descriptions="Run the unit tests on the code">
+    <target name="test" description="Run the unit tests on the code">
         <junit>
             <classpath>
                  <path refid="lib.path"/>
@@ -194,14 +202,13 @@
 
     <!-- Build exe for Windows, Lifted from: http://launch4j.sourceforge.net/docs.html -->
     <taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="lib/launch4j/launch4j.jar:lib/launch4j/xstream.jar"/>
-    <target name="build-windows" depends="dist">
-	<launch4j configFile="lib/launch4j/gradeappconfig.xml" />
+    <target name="build-windows" depends="build">
+        <launch4j configFile="lib/launch4j/gradeappconfig.xml" />
     </target>
 
     <!-- Use this target to bring up the GUI used to the edit the gradeappconfig.xml -->
     <target name="config-windows">
-	<java jar="lib/launch4j/launch4j.jar" fork="true">
-	</java>
+        <java jar="lib/launch4j/launch4j.jar" fork="true" />
     </target>	
 
 </project>
