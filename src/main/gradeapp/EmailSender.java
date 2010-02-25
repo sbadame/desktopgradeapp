@@ -8,6 +8,7 @@ package gradeapp;
 // Imports
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.io.File;
 import javax.swing.JOptionPane;
 import java.util.*;
 import javax.mail.*;
@@ -15,12 +16,18 @@ import javax.mail.internet.*;
 import javax.activation.*;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
-import javax.swing.WindowConstants;
-import java.io.File;
 
 /**
+ *  Responsible for sending out the email.
+ *   Most of Code Ripped From:
+ *   http://www.java-tips.org/other-api-tips/javamail/how-to-send-an-email-with-a-file-attachment.html
  *
  * @author DiFiore
+ */
+public class EmailSender {
+
+/**
+ * Email Is Sent From GMail Account with an attached file.
  * Doesnt Return Anything. Asks The User For Email Address To
  * Send Email To. Gets The Temp File From Temp File Function. Tmp 
  * File Is Rendered Graph. Email Is Sent From GMail Account. The Hosts
@@ -28,26 +35,8 @@ import java.io.File;
  * The Account Is Logged Into And The Email is Sent. A Progress Bar Will Show
  * Progress And A Message Will Pop Up For Errors If An Error Occurs. A 
  * Confirmation Message Is Outputted If All Goes Well.
- * 
- * Variables:
- * 
- * to Email Address To Send Email
- * from Email Address Where Data Is Sent From
- * host The Host Of Email Server
- * msgText1 Text Of Email
- * subject Subject Of Email
- * jfrProgrss JFrame That Holds Progress Bar
- * progressBar Progress Bar Itself
- * progress Overall Progress Level
- * props Instance Of Properties Class Does Work
- * doing String Of Current Event That Is Being Done
- * i Counter Of Needed Wait Loop
+ * @param tmpFile The file to send 
  */
-// Most of Code Ripped From:
-// http://www.java-tips.org/other-api-tips/javamail/how-to-send-an-email-with-a-file-attachment.html
-
-public class EmailSender {
-
 public static void sentEmail(File tmpFile){
 
   // Ask For Email Input
