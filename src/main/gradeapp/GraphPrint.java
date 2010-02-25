@@ -45,6 +45,7 @@ public class GraphPrint implements Printable{
             System.out.println("Error printing: " + pe);
           }
       }
+      //code found at http://www.developerdotstar.com/community/node/124
       public int print(Graphics g, PageFormat pf, int pageIndex) {
                 int response = NO_SUCH_PAGE;
              
