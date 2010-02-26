@@ -1,32 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- *
- * Coding based off of Sun Microsystems "help menu java tutorial"
- */
-
 package gradeapp;
 
-
-
 import javax.swing.JOptionPane;
-import java.awt.Dimension;
-import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.BoxLayout;
-import javax.swing.Box;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
-import java.beans.*; //Property change stuff
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.JTextPane;
 /**
  *
  * @author andrew
@@ -61,13 +49,13 @@ public class HelperButton extends JPanel{
         frequentPanel.setBorder(padding);
 
 
-        JTabbedPane tabbedPane = new JTabbedPane();
+        /*JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Welcome to you Help Kiosk, Enjoy!", null,
                           frequentPanel,
                           simpleDialogDesc); //tooltip text
+*/
 
-
-        add(tabbedPane, BorderLayout.CENTER);
+        add(frequentPanel, BorderLayout.CENTER);
         add(label, BorderLayout.PAGE_END);
         label.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
@@ -91,13 +79,8 @@ public class HelperButton extends JPanel{
         }
     }
 
-
-
-
-
      private JPanel createSimpleDialogBox() {
-        final int numButtons = 7;
-        JRadioButton[] radioButtons = new JRadioButton[numButtons];
+        JRadioButton[] radioButtons = new JRadioButton[5];
         final ButtonGroup group = new ButtonGroup();
 
         JButton showItButton = null;
@@ -106,70 +89,65 @@ public class HelperButton extends JPanel{
         final String displayTree = "displayTree";
         final String emailTree = "emailTree";
         final String printTree = "printTree";
-        final String authorsBib = "authorsBib";
+        final String contactInfo = "authorsBib";
         final String noiser = "noiser";
         final String gradebar = "gradebar";
 
-        radioButtons[0] = new JRadioButton("How to Upload a File.");
+        radioButtons[0] = new JRadioButton("Loading an Excel File.");
         radioButtons[0].setActionCommand(defaultMessageCommand);
 
 
-        radioButtons[1] = new JRadioButton("How to Display the Tree.");
+        radioButtons[1] = new JRadioButton("Modifying a Graph");
         radioButtons[1].setActionCommand(displayTree);
 
 
-        radioButtons[2] = new JRadioButton("How to Email the Tree.");
+        radioButtons[2] = new JRadioButton("Emailing a Graph");
         radioButtons[2].setActionCommand(emailTree);
 
-        radioButtons[3] = new JRadioButton("How to Print the Tree.");
+        radioButtons[3] = new JRadioButton("Saving a graph");
         radioButtons[3].setActionCommand(printTree);
 
-        radioButtons[4] = new JRadioButton("Authors and Bibliography.");
-        radioButtons[4].setActionCommand(authorsBib);
+        radioButtons[4] = new JRadioButton("Contact Info");
+        radioButtons[4].setActionCommand(contactInfo);
         
-        radioButtons[5] = new JRadioButton("Setting the noise degree.");
-        radioButtons[5].setActionCommand(noiser);
-        
-        radioButtons[6] = new JRadioButton("Setting a good grade standard.");
-        radioButtons[6].setActionCommand(gradebar);
-
-        for (int i = 0; i < numButtons; i++) {
+        for (int i = 0; i < radioButtons.length; i++) {
             group.add(radioButtons[i]);
         }
-        radioButtons[0].setSelected(true);
 
         showItButton = new JButton("Select");
         showItButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String command = group.getSelection().getActionCommand();
 
+                JTextPane textPane = new JTextPane(); // creates an empty text pane
+                textPane.setContentType("text/html"); // lets Java know it will be HTML
+                String text = "<HTML>";
                 //first choice
                 if (command == defaultMessageCommand) {
-                    JOptionPane.showMessageDialog(frame,
-                                "This is the answer for the Upload file selection.");
-
-                //second choice
-                } else if (command == displayTree) {
-                   JOptionPane.showMessageDialog(frame,
-                                "This is the answer for the Display selection.");
+                    text += "<h1>How to load a file</h1>";
+                    text += "<p>This is how </p>";
                 //third choice
                 } else if (command == emailTree) {
-                   JOptionPane.showMessageDialog(frame,
-                                "This is the answer for the Email Tree selection.");
+                    //text += "This is the answer for the Display selection.";
                 //fourthchoice
                 } else if (command == printTree) {
-                   JOptionPane.showMessageDialog(frame,
-                                "This is the answer for the Print the Tree selection.");
-                } else if (command == authorsBib) {
-                   JOptionPane.showMessageDialog(frame,
-                                "This is the answer for the Authors and Bibliography. selection.");
+                    //text += "This is the answer for the Display selection.";
+                } else if (command == contactInfo) {
+                    //text += "This is the answer for the Display selection.";
                 } else if (command == noiser) {
-                   JOptionPane.showMessageDialog(frame,
-                                "This is the answer for the noise. selection.");
+                    //text += "This is the answer for the Display selection.";
                 }else if (command == gradebar) {
-                   JOptionPane.showMessageDialog(frame,
-                                "This is the answer for the grade set. selection.");
+                    //text += "This is the answer for the Display selection.";
                 }
+                text += "</HTML>";
+                textPane.setText(text);
+                textPane.setEditable(false);
+                JFrame frame = new JFrame(); // makes a window to put it in
+                frame.getContentPane().add(textPane); // adds the text pane to the window
+                frame.pack(); // adjusts the window to the right size
+                frame.setVisible(true); // makes it show up
+                frame.setLocationRelativeTo(null);
+
                 
                 return;
             }
@@ -191,12 +169,12 @@ public class HelperButton extends JPanel{
 
         int numChoices = radioButtons.length;
         JPanel box = new JPanel();
-        JLabel label = new JLabel(description);
+        JLabel label2 = new JLabel(description);
 
         box.setLayout(new BoxLayout(box, BoxLayout.PAGE_AXIS));
-        box.add(label);
+        box.add(label2);
 
-        for (int i = 0; i < numChoices; i++) {
+        for (int i = 0; i < radioButtons.length; i++) {
             box.add(radioButtons[i]);
         }
 

@@ -13,9 +13,20 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.io.File;
 import java.io.IOException;
-
+/**
+ * Responsible for saving a given JFrame Component into a *.png as well as
+ * generating a temp File for EmailSender to email the image.
+ * 
+ * @author Andres Ramirez
+ */
 public class GraphSave {
-
+    /**
+     *   Prepares a given JFrame Component to be saved into an image of *.png format.
+     *  Also opens incorporates a JFileChooser so the user can select 
+     *  where to save the image. The user need only enter the name of the 
+     *  image, the extension is added automatically.
+     * @param myComponent of type Component
+     */
     public static void saveImage(Component myComponent) {
         String name;
         File finishedproduct=null;
@@ -48,7 +59,13 @@ public class GraphSave {
         }
     }
 
-
+    /**
+     *   Creates a temp file for later use. 
+     *  Once the call to this method is complete, the temp file is deleted.
+     *  Returns a File object. 
+     * @param myComponent of type Component
+     * @return temp of type File
+     */
     public static File tempMaker(Component myComponent){
         Dimension size = myComponent.getSize();
         BufferedImage myImage = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);

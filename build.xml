@@ -1,4 +1,32 @@
 <?xml version="1.0"?>
+<!--
+    build.xml - generic build file that compiles, runs and builds the final
+                product
+
+    public targets (default is build):
+
+        build       compile and test all code
+        dist        create the final deliverable, put it into the "dist" folder
+                    Note: This includes a windows executable
+        clean       delete dist and bin folders, this forces a total recompile
+        config-windows
+                    Runs the launch4j program that configures the creation
+                    of the windows .exe
+        doc         Generates the javadoc and puts it into the "doc" folder
+        run         Runs the program
+
+
+        examples: These targets run example code that was tested before
+                  moving into the main program
+
+                  example-boothe:   Tries out the Boothe code
+                  example-email:    Sends out an email
+                  example-excel:    Tries out the excel library
+                  example-graph:    Tries out the jgraph library
+                  example-grender:  Another jgraph test
+                  example-print:    test out printing
+                  example-save:     test saving to a *.png
+-->
 <project name="gradeapp" default="build" basedir=".">
 
      <!-- Holds a list of all of the 'main' project's dependencies -->
@@ -9,36 +37,45 @@
      </path>
 
     <!-- build the program -->
-    <target name="build" depends="compile,test" />
-
-    <!-- Create final Deliverable -->
-    <target name="dist" depends="compile" description="Builds the jar'd version of GradeApp">
-	<mkdir dir="dist" />
-	<mkdir dir="dist/lib" />
-	<jar jarfile="dist/GradeApp.jar">
-	    <fileset dir="bin/main"/>
-	    <manifest>
+    <target name="build" depends="-compile,test" description="Builds the jar'd version of GradeApp">
+        <mkdir dir="dist" />
+        <mkdir dir="dist/lib" />
+        <jar jarfile="dist/GradeApp.jar">
+            <fileset dir="bin/main" />
+            <manifest>
 		<attribute name="Implementation-Vendor" value="Desktop Application Group"/>
 		<attribute name="Main-Class" value="gradeapp.GradeApp" />
 		<attribute name="Class-Path" value="lib/jgraph.jar lib/junit-4.6.jar lib/mail.jar lib/poi-3.6-20091214.jar" />
-	    </manifest>
-	</jar>
-	<copy todir="dist">
-	    <path refid="lib.path"/>
-	</copy>
+            </manifest>
+        </jar>
+        <copy todir="dist">
+            <path refid="lib.path"/>
+        </copy>
+    </target>
+
+    <!-- Create a zip file containing the ditributable binaries -->
+    <target name="-zip" depends="build,-build-windows" >
+	<zip destfile="GradeApp.zip">
+	    <zipfileset dir="." includes="README.txt" prefix="GradeApp" />
+	    <zipfileset dir="dist" prefix="GradeApp" />
+	</zip>
+    </target>
+
+    <!-- Create final Deliverable -->
+    <target name="dist" depends="build,-build-windows,-zip" description="Builds the jar'd version of GradeApp">
     </target>
 
     <!-- Basic simple clean target -->
-    <target name="clean">
+    <target name="clean" description="Deletes the bin and dist folders">
         <delete dir="bin"/>
         <delete dir="dist"/>
     </target>
 
     <!-- make our binaries -->
-     <target name="compile">
-           <mkdir dir="bin" />
-           <mkdir dir="bin/main" />
-           <mkdir dir="bin/test" />
+     <target name="-compile" description="Compiles the code into the bin folder">
+       <mkdir dir="bin" />
+       <mkdir dir="bin/main" />
+       <mkdir dir="bin/test" />
 	   <mkdir dir="bin/examples" />
 	   <javac srcdir="src/main" destdir="bin/main" classpathref="lib.path" debug="on" source="6" />
 	   <javac srcdir="src/test" destdir="bin/test" classpathref="lib.path" debug="on" source="6" />
@@ -51,7 +88,7 @@
      </target>
 
     <!-- run junit to test the program -->
-    <target name="test" >
+    <target name="test" description="Run the unit tests on the code">
         <junit>
             <classpath>
                  <path refid="lib.path"/>
@@ -66,13 +103,8 @@
     </target>
 
     <!--- target to run the program -->
-    <target name="run" depends="build">
-        <java fork="true" classname="gradeapp.GradeApp" >
-            <classpath>
-                <path refid="lib.path"/>
-                <path location="bin/main"/>
-            </classpath>
-        </java>
+    <target name="run" depends="build" description="Runs the executable jar">
+        <java jar="dist/GradeApp.jar" fork="true" />
     </target>
     
     <!-- The following are targets to run a bunch of the examples -->
@@ -165,19 +197,22 @@
 
     <!-- create documention from the source code -->
     <target name="doc">
-        <javadoc packagenames="gradeapp.*" sourcepath="src/main" destdir="doc" />
+        <javadoc sourcepath="src/main" destdir="doc" classpathref="lib.path" packagenames="gradeapp" >
+	    <link href="http://java.sun.com/j2se/1.5.0/docs/api/" />
+	    <link href="http://www.jgraph.com/doc/jgraph/" />
+	    <link href="http://poi.apache.org/apidocs/" />
+	</javadoc>
     </target>
 
     <!-- Build exe for Windows, Lifted from: http://launch4j.sourceforge.net/docs.html -->
     <taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="lib/launch4j/launch4j.jar:lib/launch4j/xstream.jar"/>
-    <target name="build-windows" depends="dist">
-	<launch4j configFile="lib/launch4j/gradeappconfig.xml" />
+    <target name="-build-windows" depends="build">
+        <launch4j configFile="lib/launch4j/gradeappconfig.xml" />
     </target>
 
     <!-- Use this target to bring up the GUI used to the edit the gradeappconfig.xml -->
     <target name="config-windows">
-	<java jar="lib/launch4j/launch4j.jar" fork="true">
-	</java>
+        <java jar="lib/launch4j/launch4j.jar" fork="true" />
     </target>	
 
 </project>
