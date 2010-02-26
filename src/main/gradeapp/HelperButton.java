@@ -4,7 +4,6 @@ import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import javax.swing.BoxLayout;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
@@ -12,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import javax.swing.JTextPane;
@@ -22,65 +20,31 @@ import javax.swing.JTextPane;
  */
 public class HelperButton extends JPanel{
 
-
     JLabel label;
 
     JFrame frame;
-    String simpleDialogDesc = "Some simple message dialogs";
-
-    CustomDialog2 customDialog2;
+    String simpleDialogDesc = "Choose the topic that you need help with";
 
     /** Creates the GUI shown inside the helperframe's content pane. */
     public HelperButton(JFrame frame) {
         super(new BorderLayout());
         this.frame = frame;
-        customDialog2 = new CustomDialog2(frame, "geisel", this);
-        customDialog2.pack();
-
 
         //Create the components.
         JPanel frequentPanel = createSimpleDialogBox();
 
-        label = new JLabel("Click the \"Select\" button"
-                           + " to bring up the selected dialog.",
-                           JLabel.CENTER);
+        label = new JLabel("Choose the category of help that you need." ,JLabel.CENTER);
 
         //Lay them out.
         Border padding = BorderFactory.createEmptyBorder(20,20,5,20);
         frequentPanel.setBorder(padding);
 
-
-        /*JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Welcome to you Help Kiosk, Enjoy!", null,
-                          frequentPanel,
-                          simpleDialogDesc); //tooltip text
-*/
-
         add(frequentPanel, BorderLayout.CENTER);
         add(label, BorderLayout.PAGE_END);
         label.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-
-
-
     }
 
-    /** Sets the text displayed at the bottom of the helperframe. */
-    void setLabel(String newText) {
-        label.setText(newText);
-    }
-
-    /** Returns an ImageIcon, or null if the path was invalid. */
-    protected static ImageIcon createImageIcon(String path) {
-        java.net.URL imgURL = HelperButton.class.getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
-    }
-
-     private JPanel createSimpleDialogBox() {
+    private JPanel createSimpleDialogBox() {
         final ButtonGroup group = new ButtonGroup();
 
         final String loadHelpCommand = "loadhelp";
