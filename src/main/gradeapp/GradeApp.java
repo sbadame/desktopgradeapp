@@ -1,12 +1,15 @@
 package gradeapp;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * The main GUI and driver of the program.
@@ -243,6 +246,8 @@ public class GradeApp extends javax.swing.JFrame {
      */
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter xlsfilter = new FileNameExtensionFilter("XLS Files","xls");
+        fc.setFileFilter(xlsfilter);
         if (fc.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
             return;
         File input = fc.getSelectedFile();
@@ -263,9 +268,11 @@ public class GradeApp extends javax.swing.JFrame {
 
             //gRender.render();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(GradeApp.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane NotFoundFrame = new JOptionPane();
+            JOptionPane.showMessageDialog(NotFoundFrame, "Cannot Find the Requested File. Please Enter Proper File Name.", "Missing File", JOptionPane.ERROR_MESSAGE);
         } catch (IOException ex) {
-            Logger.getLogger(GradeApp.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane IOFrame = new JOptionPane();
+            JOptionPane.showMessageDialog(IOFrame, "Problems Opening File. Please Check Permissions", "File Error", JOptionPane.ERROR_MESSAGE);
         } catch (GraphFormatException ex) {
             Logger.getLogger(GradeApp.class.getName()).log(Level.SEVERE, null, ex);
         }

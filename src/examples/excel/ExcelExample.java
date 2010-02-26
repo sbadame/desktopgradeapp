@@ -1,5 +1,6 @@
 package excel;
 
+import com.sun.corba.se.impl.ior.NewObjectKeyTemplateBase;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -41,14 +42,17 @@ public class ExcelExample {
         
         for(int i=7; i<=(7+QNum-1); i++ ){
             HSSFCell keyCell = KeyRow.getCell(i);
+            int keyCellType = keyCell.getCellType();
             key.add(keyCell.getRichStringCellValue().getString().charAt(0));
+            System.out.println(keyCellType);
         }
 
         for(int j=4; j<rowCount-3; j++ ){
             studAns.clear();
             HSSFRow studRow = MainSheet.getRow(j);
             for(int k=7; k<=(7+QNum-1); k++){
-                HSSFCell studCell = studRow.getCell(k);
+                HSSFCell studCell = studRow.getCell(k); 
+                System.out.println(studCell.getCellType());
                 if(studCell == null){
                     studAns.add(' ');
                 }
