@@ -54,7 +54,7 @@
     </target>
 
     <!-- Create a zip file containing the ditributable binaries -->
-    <target name="-zip" depends="build,build-windows" >
+    <target name="-zip" depends="build,-build-windows" >
 	<zip destfile="GradeApp.zip">
 	    <zipfileset dir="." includes="README.txt" prefix="GradeApp" />
 	    <zipfileset dir="dist" prefix="GradeApp" />
@@ -62,7 +62,7 @@
     </target>
 
     <!-- Create final Deliverable -->
-    <target name="dist" depends="build,build-windows,-zip" description="Builds the jar'd version of GradeApp">
+    <target name="dist" depends="build,-build-windows,-zip" description="Builds the jar'd version of GradeApp">
     </target>
 
     <!-- Basic simple clean target -->
@@ -197,12 +197,16 @@
 
     <!-- create documention from the source code -->
     <target name="doc">
-        <javadoc packagenames="gradeapp.*" sourcepath="src/main" destdir="doc" />
+        <javadoc sourcepath="src/main" destdir="doc" classpathref="lib.path" packagenames="gradeapp" >
+	    <link href="http://java.sun.com/j2se/1.5.0/docs/api/" />
+	    <link href="http://www.jgraph.com/doc/jgraph/" />
+	    <link href="http://poi.apache.org/apidocs/" />
+	</javadoc>
     </target>
 
     <!-- Build exe for Windows, Lifted from: http://launch4j.sourceforge.net/docs.html -->
     <taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="lib/launch4j/launch4j.jar:lib/launch4j/xstream.jar"/>
-    <target name="build-windows" depends="build">
+    <target name="-build-windows" depends="build">
         <launch4j configFile="lib/launch4j/gradeappconfig.xml" />
     </target>
 
