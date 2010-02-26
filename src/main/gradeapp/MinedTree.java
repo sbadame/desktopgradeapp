@@ -9,7 +9,7 @@ import java.io.*; // for the tests
  * is meant to serve as a useful library for Software Engineering students
  * working on their project.
  * @author Peter Boothe - peter.boothe@manhattan.edu
- * @date 9 Feb 2010
+ * @since date 9 Feb 2010
  */
 public class MinedTree {
     int correct;

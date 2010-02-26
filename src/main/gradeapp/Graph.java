@@ -13,7 +13,7 @@ public class Graph {
 
 //Default Arguments
     public static final int DEFAULT_GOODGRADE = 0;
-    public static final float DEFAULT_NOISE = 0.15f;
+    public static final float DEFAULT_QUALITY = 0.15f;
 
     /**
      * The singleton instance of the graph
@@ -34,7 +34,7 @@ public class Graph {
     
     //Default settings
     private int goodgrade = DEFAULT_GOODGRADE;
-    private float noise = DEFAULT_NOISE;
+    private float quality = DEFAULT_QUALITY;
     private Vector<Vector<Character>> grades = new Vector<Vector<Character>>();
     private Vector<Character> answerkey = new Vector<Character>();
     private MinedTree tree;
@@ -66,7 +66,7 @@ public class Graph {
         for (int i = 0; i < ans.length; i++) {
             ans[i] = String.valueOf(answerkey.get(i));
         }
-        tree = new MinedTree(getNoise(), getGoodgrade(), ans, students);
+        tree = new MinedTree(getQuality(), getGoodgrade(), ans, students);
     }
 
 
@@ -86,17 +86,17 @@ public class Graph {
     }
 
     /**
-     * @return the noise
+     * @return the quality
      */
-    public float getNoise() {
-        return noise;
+    public float getQuality() {
+        return quality;
     }
 
     /**
-     * @param noise the noise to set
+     * @param quality the quality to set
      */
-    public void setNoise(float noise) {
-        this.noise = noise;
+    public void setQuality(float quality) {
+        this.quality = quality;
         BootheAlgo();
     }
 
