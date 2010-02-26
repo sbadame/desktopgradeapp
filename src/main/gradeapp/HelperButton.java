@@ -142,7 +142,6 @@ text+="<h1>Setting the Quality</h1><p>Your first question probably is: \"What" +
                 text += "</HTML>";
                 textPane.setText(text);
                 textPane.setEditable(false);
-                textPane.setSize(200, 300);
                 JFrame helperframe = new JFrame(); // makes a window to put it in
                 helperframe.getContentPane().add(new JScrollPane(textPane)); // adds the text pane to the window
                 helperframe.pack(); // adjusts the window to the right size

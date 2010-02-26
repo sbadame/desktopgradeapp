@@ -51,7 +51,7 @@ public class GradeApp extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         helpButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
-        
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("The Weeder");
 
@@ -73,16 +73,11 @@ public class GradeApp extends javax.swing.JFrame {
 
         printButton.setText("Print");
         printButton.setEnabled(false);
-        printButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printButtonActionPerformed(evt);
-            }
-        });
 
         goodGradePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Good Grade - 0/0"));
         goodGradePanel.setToolTipText("This bar defines what a good grade is. Move it right to increase the grade, move it left to decrease it.");
 
-        gradeSlider.setFont(new java.awt.Font("DejaVu Sans", 0, 10)); // NOI18N
+        gradeSlider.setFont(new java.awt.Font("DejaVu Sans", 0, 10));
         gradeSlider.setMajorTickSpacing(5);
         gradeSlider.setMaximum(0);
         gradeSlider.setMinorTickSpacing(1);
@@ -115,7 +110,7 @@ public class GradeApp extends javax.swing.JFrame {
         qualitySliderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Quality - " + (int)(Graph.DEFAULT_QUALITY*100) + "%"));
         qualitySliderPanel.setToolTipText("This bar modifies the quality of the graph. Increasing quality shrinks the graph but gives more definate results, while reducing quality gives more results but they may not be the most telling.");
 
-        qualitySlider.setFont(new java.awt.Font("DejaVu Sans", 0, 8)); // NOI18N
+        qualitySlider.setFont(new java.awt.Font("DejaVu Sans", 0, 8));
         qualitySlider.setMajorTickSpacing(10);
         qualitySlider.setMinorTickSpacing(5);
         qualitySlider.setPaintLabels(true);
@@ -150,6 +145,7 @@ public class GradeApp extends javax.swing.JFrame {
         scaleSlider.setPaintLabels(true);
         scaleSlider.setPaintTicks(true);
         scaleSlider.setValue(100);
+        scaleSlider.setEnabled(false);
         scaleSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 scaleSliderStateChanged(evt);
