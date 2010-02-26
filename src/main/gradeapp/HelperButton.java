@@ -91,12 +91,26 @@ public class HelperButton extends JPanel{
 
                 if (command.equals(loadHelpCommand)) {
                     text += "<h1>How to load a file</h1>";
-                    text += "<p>This is how </p>";
+                    text += "<p>Begin by clicking on the 'Load *.xls' button<br />" +
+                    "which will open a window where you can browse<br />" +
+                    "your local drives for an Excel file to load. If you<br /> " +
+                    "have any issue loading a file, check the following:</p>" +
+                    "<ul><li>Are you selecting an Excel file(*.xls or *.xlsx)?</li>"+
+                    "<li>Is the data in the selected Excel file arranged<br />"+
+                    "in the same manner as was produced by the<br />Scantron machine?</li>"+
+                    "</ul>";
 
                 } else if (command.equals(graphHelpCommand)) {
 
                 } else if (command.equals(saveHelpCommand)) {
-
+                    text += "<h1>Saving a Tree</h1>" +
+                    "<p><b>Note:</b> You need to have loaded an Excel file<br />" +
+                    "into the program before you will be able to save a tree.</p>" +
+                    "<br />Save a tree by clicking on the 'Save' button. This will<br />" +
+                    "open a window where you can browse to where you want to<br />" +
+                    "save a copy of the tree. You do not need to specify an<br />" +
+                    "extension (ie: .jpg, .gif, etc) the image will be automatically<br />" +
+                    "saved with a *.png extension for you.</p>";
                 } else if (command.equals(emailHelpCommand)) {
                     //text += "This is the answer for the Display selection.";
                 } else if (command.equals(printHelpCommand)) {
