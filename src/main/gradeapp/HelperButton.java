@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 /**
  *
@@ -35,15 +36,12 @@ public class HelperButton extends JPanel{
         //Create the components.
         JPanel frequentPanel = createSimpleDialogBox();
 
-        label = new JLabel("Choose the category of help that you need." ,JLabel.CENTER);
 
         //Lay them out.
         Border padding = BorderFactory.createEmptyBorder(20,20,5,20);
         frequentPanel.setBorder(padding);
 
         add(frequentPanel, BorderLayout.CENTER);
-        add(label, BorderLayout.PAGE_END);
-        label.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
     }
 
     private JPanel createSimpleDialogBox() {
@@ -101,7 +99,29 @@ public class HelperButton extends JPanel{
                     "</ul>";
 
                 } else if (command.equals(graphHelpCommand)) {
-
+text+= "<h1>Reading a Tree</h1><p>Once you have loaded a file a tree will be" +
+"shown. The tree is made up of cells and edges. Cell are the orange "+
+"boxes and edges connect them. Each cell represents whether a question was" +
+"answered correctly or incorrectly. The main idea here is that there is no" +
+" extrapolation or guesswork done by the program. The results you see are" +
+" real.</p>";
+text+="<h1>Setting what a good grade is.</h1><p>Of course, every exam is " +
+"different and so what constitues a good grade needs to be defined by you." +
+"The way that you do this is by moving the \"Good Grade\" slider to what" +
+"you think a good grade is.</p>";
+text+="<h1>Setting the Quality</h1><p>Your first question probably is: \"What" +
+" is quality?\" or \"Why wouldn't I want the best Quality?\" What the quality" +
+" bar is really asking is \"How good a predictor does a question need to be" +
+" for me to show it to you?\" Basically, as the program breaks down how people" +
+" did on the exam (or as you traverse down the tree, however you wish to look"+
+" at it.) the questions become worse and predictors. By raising the \"Quality\"" +
+" bar you are raising the cutoff on how good of a predictor the question needs" +
+" to be for it to be shown. As you increase quality you will see your tend to" +
+" shrink, increase and it grows. But be warned, a large graph does not necessarily " +
+" mean more information. Since the amount Quality wanted is dependent on the " +
+"exam,it needs to be tuned manually. A good rule of thumb is to increase the " +
+" as far as possible while still getting a <i>good</i>(This is a weasel word," +
+" I know) sized graph and then going down no further. </p>";
                 } else if (command.equals(saveHelpCommand)) {
                     text += "<h1>Saving a Tree</h1>" +
                     "<p><b>Note:</b> You need to have loaded an Excel file<br />" +
@@ -122,8 +142,9 @@ public class HelperButton extends JPanel{
                 text += "</HTML>";
                 textPane.setText(text);
                 textPane.setEditable(false);
+                textPane.setSize(200, 300);
                 JFrame helperframe = new JFrame(); // makes a window to put it in
-                helperframe.getContentPane().add(textPane); // adds the text pane to the window
+                helperframe.getContentPane().add(new JScrollPane(textPane)); // adds the text pane to the window
                 helperframe.pack(); // adjusts the window to the right size
                 helperframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 helperframe.addWindowListener(new WindowListener(){
@@ -159,10 +180,10 @@ public class HelperButton extends JPanel{
                               JButton showButton) {
 
         JPanel box = new JPanel();
-        JLabel label = new JLabel(description);
+        JLabel label2 = new JLabel(description);
 
         box.setLayout(new BoxLayout(box, BoxLayout.PAGE_AXIS));
-        box.add(label);
+        box.add(label2);
         Enumeration<AbstractButton> buttons = group.getElements();
         while(buttons.hasMoreElements())
             box.add(buttons.nextElement());
