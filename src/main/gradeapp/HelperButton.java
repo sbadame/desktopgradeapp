@@ -1,5 +1,6 @@
 package gradeapp;
 
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -21,9 +22,10 @@ import javax.swing.JTextPane;
 public class HelperButton extends JPanel{
 
     JLabel label;
-
     JFrame frame;
     String simpleDialogDesc = "Choose the topic that you need help with";
+    String iconDesc = "A JOptionPane has its choice of icons";
+    String moreDialogDesc = "Some more dialogs";
 
     /** Creates the GUI shown inside the helperframe's content pane. */
     public HelperButton(JFrame frame) {
@@ -126,7 +128,6 @@ public class HelperButton extends JPanel{
                 frame.setVisible(false); //Hide the help panel
                 helperframe.setVisible(true); // makes it show up
                 helperframe.setLocationRelativeTo(null);
-                
                 return;
             }
         });
@@ -144,14 +145,13 @@ public class HelperButton extends JPanel{
                               JButton showButton) {
 
         JPanel box = new JPanel();
-        JLabel label2 = new JLabel(description);
+        JLabel label = new JLabel(description);
 
         box.setLayout(new BoxLayout(box, BoxLayout.PAGE_AXIS));
-        box.add(label2);
+        box.add(label);
         Enumeration<AbstractButton> buttons = group.getElements();
-        while(buttons.hasMoreElements()){
+        while(buttons.hasMoreElements())
             box.add(buttons.nextElement());
-        }
 
         JPanel pane = new JPanel(new BorderLayout());
         pane.add(box, BorderLayout.PAGE_START);
@@ -183,3 +183,4 @@ public class HelperButton extends JPanel{
     }
 
 }
+
