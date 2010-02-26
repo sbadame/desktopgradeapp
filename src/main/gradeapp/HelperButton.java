@@ -1,6 +1,5 @@
 package gradeapp;
 
-import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -9,11 +8,13 @@ import javax.swing.ImageIcon;
 import javax.swing.BoxLayout;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
-import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
 import javax.swing.JTextPane;
 /**
  *
@@ -29,7 +30,7 @@ public class HelperButton extends JPanel{
 
     CustomDialog2 customDialog2;
 
-    /** Creates the GUI shown inside the frame's content pane. */
+    /** Creates the GUI shown inside the helperframe's content pane. */
     public HelperButton(JFrame frame) {
         super(new BorderLayout());
         this.frame = frame;
@@ -63,7 +64,7 @@ public class HelperButton extends JPanel{
 
     }
 
-    /** Sets the text displayed at the bottom of the frame. */
+    /** Sets the text displayed at the bottom of the helperframe. */
     void setLabel(String newText) {
         label.setText(newText);
     }
@@ -80,41 +81,40 @@ public class HelperButton extends JPanel{
     }
 
      private JPanel createSimpleDialogBox() {
-        JRadioButton[] radioButtons = new JRadioButton[5];
         final ButtonGroup group = new ButtonGroup();
 
-        JButton showItButton = null;
+        final String loadHelpCommand = "loadhelp";
+        final String graphHelpCommand = "graphhelp";
+        final String emailHelpCommand = "emailhelp";
+        final String saveHelpCommand = "savehelp";
+        final String printHelpCommand = "printhelp";
+        final String aboutCommand = "abouthelp";
 
-        final String defaultMessageCommand = "default";
-        final String displayTree = "displayTree";
-        final String emailTree = "emailTree";
-        final String printTree = "printTree";
-        final String contactInfo = "authorsBib";
-        final String noiser = "noiser";
-        final String gradebar = "gradebar";
+        JRadioButton loadhelp = new JRadioButton("Loading an Excel File.");
+        loadhelp.setActionCommand(loadHelpCommand);
+        group.add(loadhelp);
 
-        radioButtons[0] = new JRadioButton("Loading an Excel File.");
-        radioButtons[0].setActionCommand(defaultMessageCommand);
+        JRadioButton graphHelp = new JRadioButton("Understanding and Modifying a Grade Tree");
+        graphHelp.setActionCommand(graphHelpCommand);
+        group.add(graphHelp);
 
+        JRadioButton emailHelp = new JRadioButton("Emailing a Tree");
+        emailHelp.setActionCommand(emailHelpCommand);
+        group.add(emailHelp);
 
-        radioButtons[1] = new JRadioButton("Modifying a Graph");
-        radioButtons[1].setActionCommand(displayTree);
+        JRadioButton saveHelp = new JRadioButton("Saving a Tree");
+        saveHelp.setActionCommand(saveHelpCommand);
+        group.add(saveHelp);
 
+        JRadioButton printHelp = new JRadioButton("Printing a Tree");
+        printHelp.setActionCommand(printHelpCommand);
+        group.add(printHelp);
 
-        radioButtons[2] = new JRadioButton("Emailing a Graph");
-        radioButtons[2].setActionCommand(emailTree);
+        JRadioButton aboutHelp = new JRadioButton("About the developers");
+        aboutHelp.setActionCommand(aboutCommand);
+        group.add(aboutHelp);
 
-        radioButtons[3] = new JRadioButton("Saving a graph");
-        radioButtons[3].setActionCommand(printTree);
-
-        radioButtons[4] = new JRadioButton("Contact Info");
-        radioButtons[4].setActionCommand(contactInfo);
-        
-        for (int i = 0; i < radioButtons.length; i++) {
-            group.add(radioButtons[i]);
-        }
-
-        showItButton = new JButton("Select");
+        JButton showItButton = new JButton("Select");
         showItButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String command = group.getSelection().getActionCommand();
@@ -122,40 +122,52 @@ public class HelperButton extends JPanel{
                 JTextPane textPane = new JTextPane(); // creates an empty text pane
                 textPane.setContentType("text/html"); // lets Java know it will be HTML
                 String text = "<HTML>";
-                //first choice
-                if (command == defaultMessageCommand) {
+
+                if (command.equals(loadHelpCommand)) {
                     text += "<h1>How to load a file</h1>";
                     text += "<p>This is how </p>";
-                //third choice
-                } else if (command == emailTree) {
+
+                } else if (command.equals(graphHelpCommand)) {
+
+                } else if (command.equals(saveHelpCommand)) {
+
+                } else if (command.equals(emailHelpCommand)) {
                     //text += "This is the answer for the Display selection.";
-                //fourthchoice
-                } else if (command == printTree) {
+                } else if (command.equals(printHelpCommand)) {
                     //text += "This is the answer for the Display selection.";
-                } else if (command == contactInfo) {
-                    //text += "This is the answer for the Display selection.";
-                } else if (command == noiser) {
-                    //text += "This is the answer for the Display selection.";
-                }else if (command == gradebar) {
+                } else if (command.equals(aboutCommand)) {
                     //text += "This is the answer for the Display selection.";
                 }
+
                 text += "</HTML>";
                 textPane.setText(text);
                 textPane.setEditable(false);
-                JFrame frame = new JFrame(); // makes a window to put it in
-                frame.getContentPane().add(textPane); // adds the text pane to the window
-                frame.pack(); // adjusts the window to the right size
-                frame.setVisible(true); // makes it show up
-                frame.setLocationRelativeTo(null);
+                JFrame helperframe = new JFrame(); // makes a window to put it in
+                helperframe.getContentPane().add(textPane); // adds the text pane to the window
+                helperframe.pack(); // adjusts the window to the right size
+                helperframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                helperframe.addWindowListener(new WindowListener(){
+                    public void windowClosed(WindowEvent e) {
+                        frame.pack();
+                        frame.setVisible(true);
+                    }
+                    public void windowOpened(WindowEvent e) {}
+                    public void windowClosing(WindowEvent e) {}
+                    public void windowIconified(WindowEvent e) {}
+                    public void windowDeiconified(WindowEvent e) {}
+                    public void windowActivated(WindowEvent e) {}
+                    public void windowDeactivated(WindowEvent e) {}
+                });
 
+                frame.setVisible(false); //Hide the help panel
+                helperframe.setVisible(true); // makes it show up
+                helperframe.setLocationRelativeTo(null);
                 
                 return;
             }
         });
 
-        return createPane(simpleDialogDesc + ":",
-                          radioButtons,
-                          showItButton);
+        return createPane(simpleDialogDesc + ":", group, showItButton);
     }
 
      /**
@@ -164,18 +176,17 @@ public class HelperButton extends JPanel{
      * of radio buttons, and the Show it! button.
      */
     private JPanel createPane(String description,
-                              JRadioButton[] radioButtons,
+                              ButtonGroup group,
                               JButton showButton) {
 
-        int numChoices = radioButtons.length;
         JPanel box = new JPanel();
         JLabel label2 = new JLabel(description);
 
         box.setLayout(new BoxLayout(box, BoxLayout.PAGE_AXIS));
         box.add(label2);
-
-        for (int i = 0; i < radioButtons.length; i++) {
-            box.add(radioButtons[i]);
+        Enumeration<AbstractButton> buttons = group.getElements();
+        while(buttons.hasMoreElements()){
+            box.add(buttons.nextElement());
         }
 
         JPanel pane = new JPanel(new BorderLayout());
@@ -185,7 +196,7 @@ public class HelperButton extends JPanel{
     }
 
 
-        /**
+    /**
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the
      * event-dispatching thread.
@@ -194,36 +205,17 @@ public class HelperButton extends JPanel{
         //Create and set up the window.
         JFrame frame = new JFrame("Help Menu");
         frame.setSize(400, 300);
-
-        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension dim = toolkit.getScreenSize();
-
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);
 
-
-
         //Create and set up the content pane.
         HelperButton newContentPane = new HelperButton(frame);
-        newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
         //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
-
-   // public static void main(String[] args) {
-       // Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-    //    javax.swing.SwingUtilities.invokeLater(new Runnable() {
-    //        public void run() {
-    //            createAndShowGUI();
-     //       }
-     //   });
-   // }
-
 
 }

@@ -33,7 +33,7 @@ public class GRender extends JPanel{
     private static final String LOAD = "Load";
 
     //lets us swap between showing the "click on the load button!" text
-    // and actually showing the graph
+    //and actually showing the graph
     private CardLayout swingLayout = new CardLayout();
 
     private JGraph graph;
@@ -55,6 +55,11 @@ public class GRender extends JPanel{
         view = new GraphLayoutCache(model, new DefaultCellViewFactory());
         graph = new JGraph(model, view);
         graph.setAntiAliased(true);
+        graph.setDisconnectOnMove(true);
+        graph.setConnectable(true);
+        graph.setDisconnectOnMove(false);
+        graph.setDisconnectable(false);
+        graph.setEdgeLabelsMovable(false);
 
         //Configure our layout
         graphLayout = new JGraphTreeLayout();
@@ -157,6 +162,7 @@ public class GRender extends JPanel{
         GraphConstants.setLineEnd(edge.getAttributes(), GraphConstants.ARROW_CLASSIC); 
         GraphConstants.setEndFill(edge.getAttributes(), true);
         GraphConstants.setEditable(edge.getAttributes(), false);
+        GraphConstants.setSelectable(edge.getAttributes(), false);
         return edge;
     }
 
