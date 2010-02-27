@@ -100,8 +100,8 @@ public class HelperButton extends JPanel{
 
                 } else if (command.equals(graphHelpCommand)) {
 text+= "<h1>Reading a Tree</h1><p>Once you have loaded a file a tree will be" +
-"shown. The tree is made up of cells and edges. Cell are the orange "+
-"boxes and edges connect them. Each cell represents whether a question was" +
+" shown. The tree is made up of cells and edges. Cell are the orange "+
+"boxes and the edges connect them. Each cell represents whether a question was" +
 "answered correctly or incorrectly. The main idea here is that there is no" +
 " extrapolation or guesswork done by the program. The results you see are" +
 " real.</p>";
@@ -110,17 +110,20 @@ text+="<h1>Setting what a good grade is.</h1><p>Of course, every exam is " +
 "The way that you do this is by moving the \"Good Grade\" slider to what" +
 "you think a good grade is.</p>";
 text+="<h1>Setting the Quality</h1><p>Your first question probably is: \"What" +
-" is quality?\" or \"Why wouldn't I want the best Quality?\" What the quality" +
+" is quality?\" or \"Why wouldn't I want the best Quality?\" The quick answer "+
+" is that the Quality beind referred to is the question quality. The higher the" +
+" quality, the smaller the tree, the lower the quality the bigger the tree but the" +
+" results may not be as convincing. What the quality" +
 " bar is really asking is \"How good a predictor does a question need to be" +
 " for me to show it to you?\" Basically, as the program breaks down how people" +
 " did on the exam (or as you traverse down the tree, however you wish to look"+
-" at it.) the questions become worse and predictors. By raising the \"Quality\"" +
-" bar you are raising the cutoff on how good of a predictor the question needs" +
-" to be for it to be shown. As you increase quality you will see your tend to" +
+" at it.) the questions become worse and predictors.By raising the \"Quality\"" +
+" bar you are raising the cutoff on how good of a predictorthe question needs" +
+" to be for it to be shown. As you increase quality you will see your tendto" +
 " shrink, increase and it grows. But be warned, a large graph does not necessarily " +
-" mean more information. Since the amount Quality wanted is dependent on the " +
-"exam,it needs to be tuned manually. A good rule of thumb is to increase the " +
-" as far as possible while still getting a <i>good</i>(This is a weasel word," +
+" meanmore information. Since the amount Quality wanted is dependent on the " +
+"exam,it needs tobe tuned manually. A good rule of thumb is to increase the " +
+" as far as possible while stillgetting a <i>good</i>(This is a weasel word," +
 " I know) sized graph and then going down no further. </p>";
                 } else if (command.equals(saveHelpCommand)) {
                     text += "<h1>Saving a Tree</h1>" +
@@ -149,10 +152,15 @@ text+="<h1>Setting the Quality</h1><p>Your first question probably is: \"What" +
                        "Please just select your printer and print the file.<br>"+
                        "The file will be printed zoomed out so it doesnt matter where the zoom slider is.<br>";
                 } else if (command.equals(aboutCommand)) {
-text += "<h1>Team Members</h1><ul><li>Sandro Badame</li><li>Anthony DiFiore</li>" +
-        "<li>Christopher Eichel<li><li>Andrew Esca</li> <li>Andres Ramirez" +
-        "</li><li></li></ul><h2>To Learn more about this project follow us at:" +
-        "<a href=\"http://github.com/sbadame/desktopgradeapp/\">http://github.com/sbadame/desktopgradeapp/</a></h2>";
+                    text += "<h1>About Us</h1>";
+                    text +="<p>This App was written by:</p>" +
+                    		"<ul><li>Sandro Badame</li>" +
+                    		"<li>Anthony DiFiore</li>" +
+                    		"<li>Christopher Eichel</li>" +
+                    		"<li>Andrew Esca</li>" +
+                    		"<li>Andres Ramirez</li></ul>"+
+                            "<h3>To Learn more about this project follow us at:<br> " +
+                            "http://github.com/sbadame/desktopgradeapp/</h3>";
                 }
 
                 text += "</HTML>";
