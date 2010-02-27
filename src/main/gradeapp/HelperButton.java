@@ -132,11 +132,24 @@ text+="<h1>Setting the Quality</h1><p>Your first question probably is: \"What" +
                     "extension (ie: .jpg, .gif, etc) the image will be automatically<br />" +
                     "saved with a *.png extension for you.</p>";
                 } else if (command.equals(emailHelpCommand)) {
-                    //text += "This is the answer for the Display selection.";
+                    text += "<h1>Emailing a File</h1>" +
+                       "<p>You also have to load an excel file so a graph is displayed before it can be emailed.<br>"+
+                       "When you click on the email button you must input an email address to send the graph to.<br>" +
+                       "You do not have to select any file, the application will automaticlly select the picture of the graph.<br>"+
+                       "After selecting a file, application will open a progress bar, which will close when the emailing process is complete.<br>"+
+                       "You will then get a message stating whether the file was successfully sent or not.<br</p>"+
+                       "<h2>Issues</h2>" +
+                       "<p>If not successful please must sure that you are connected to the internet.<br>"+
+                       "Also must sure that you typed in the correct email address.<br>"+
+                       "Please check to see if gmail server or your email server is up.<br>";
                 } else if (command.equals(printHelpCommand)) {
-                    //text += "This is the answer for the Display selection.";
+                    text +="<h1>Printing a File</h1>" +
+                       "<p>You also have to load an excel file so a graph is displayed before it can be printed.<br>"+
+                       "When you click on the print button a standard print window will open.<br>"+
+                       "Please just select your printer and print the file.<br>"+
+                       "The file will be printed zoomed out so it doesnt matter where the zoom slider is.<br>";
                 } else if (command.equals(aboutCommand)) {
-                    //text += "This is the answer for the Display selection.";
+                    text += "Ufaufaufa";
                 }
 
                 text += "</HTML>";

@@ -180,7 +180,7 @@ public static void sentEmail(File tmpFile){
       error = mex.getMessage();
       System.out.println(error);
       jfrProgress.dispose();
-      JOptionPane.showMessageDialog(null, "Dear User,\nAn Error Occured During:\n" + doing + "\nYour Email Could Not Be Sent.\nPossible Solutions:\nCheck Internet Connection.\nCheck Inputted Email Address.\nCheck Gmail Server.\n" + "Sincerely,\nHacker.\n");
+      JOptionPane.showMessageDialog(null, "Dear User,\nAn Error Occured During:\n" + doing + "\nYour Email Could Not Be Sent.\nCheck Help Menu For Possible Solutions.\n" + "Sincerely,\nHacker.\n");
       Exception ex = null;
       if ((ex = mex.getNextException()) != null) {
         ex.printStackTrace();
