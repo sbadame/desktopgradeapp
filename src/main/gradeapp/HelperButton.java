@@ -100,27 +100,27 @@ public class HelperButton extends JPanel{
 
                 } else if (command.equals(graphHelpCommand)) {
 text+= "<h1>Reading a Tree</h1><p>Once you have loaded a file a tree will be" +
-"shown. The tree is made up of cells and edges. Cell are the orange "+
-"boxes and edges connect them. Each cell represents whether a question was" +
-"answered correctly or incorrectly. The main idea here is that there is no" +
+"shown. The tree is made up of cells and edges.<br /> Cell are the orange "+
+"boxes and edges connect them. Each cell represents whether a question<br /> was" +
+"answered correctly or incorrectly. The main idea here is that there is no<br />" +
 " extrapolation or guesswork done by the program. The results you see are" +
 " real.</p>";
 text+="<h1>Setting what a good grade is.</h1><p>Of course, every exam is " +
-"different and so what constitues a good grade needs to be defined by you." +
-"The way that you do this is by moving the \"Good Grade\" slider to what" +
+"different and so what constitues a good grade needs<br /> to be defined by you." +
+"The way that you do this is by moving the \"Good Grade\" <br />slider to what" +
 "you think a good grade is.</p>";
 text+="<h1>Setting the Quality</h1><p>Your first question probably is: \"What" +
-" is quality?\" or \"Why wouldn't I want the best Quality?\" What the quality" +
-" bar is really asking is \"How good a predictor does a question need to be" +
-" for me to show it to you?\" Basically, as the program breaks down how people" +
-" did on the exam (or as you traverse down the tree, however you wish to look"+
-" at it.) the questions become worse and predictors. By raising the \"Quality\"" +
-" bar you are raising the cutoff on how good of a predictor the question needs" +
-" to be for it to be shown. As you increase quality you will see your tend to" +
+" is quality?\" or<br /> \"Why wouldn't I want the best Quality?\" What the quality" +
+" bar is really <br />asking is \"How good a predictor does a question need to be" +
+" for me to show it to you?\" <br />Basically, as the program breaks down how people" +
+" did on the exam (or as you traverse<br /> down the tree, however you wish to look"+
+" at it.) the questions become worse and predictors.<br />By raising the \"Quality\"" +
+" bar you are raising the cutoff on how good of a predictor<br />the question needs" +
+" to be for it to be shown. As you increase quality you will see your tend<br />to" +
 " shrink, increase and it grows. But be warned, a large graph does not necessarily " +
-" mean more information. Since the amount Quality wanted is dependent on the " +
-"exam,it needs to be tuned manually. A good rule of thumb is to increase the " +
-" as far as possible while still getting a <i>good</i>(This is a weasel word," +
+" mean<br />more information. Since the amount Quality wanted is dependent on the " +
+"exam,it needs to<br />be tuned manually. A good rule of thumb is to increase the " +
+" as far as possible while still<br />getting a <i>good</i>(This is a weasel word," +
 " I know) sized graph and then going down no further. </p>";
                 } else if (command.equals(saveHelpCommand)) {
                     text += "<h1>Saving a Tree</h1>" +
@@ -149,7 +149,13 @@ text+="<h1>Setting the Quality</h1><p>Your first question probably is: \"What" +
                        "Please just select your printer and print the file.<br>"+
                        "The file will be printed zoomed out so it doesnt matter where the zoom slider is.<br>";
                 } else if (command.equals(aboutCommand)) {
-                    text += "Ufaufaufa";
+                    text += "<h1>About Us</h1>";
+                    text +="<p>This App was written by:</p>" +
+                    		"<ul><li>Sandro Badame</li>" +
+                    		"<li>Anthony DiFiore</li>" +
+                    		"<li>Christopher Eichel</li>" +
+                    		"<li>Andrew Esca</li>" +
+                    		"<li>Andres Ramirez</li></ul>";
                 }
 
                 text += "</HTML>";
