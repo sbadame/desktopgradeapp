@@ -149,7 +149,10 @@ text+="<h1>Setting the Quality</h1><p>Your first question probably is: \"What" +
                        "Please just select your printer and print the file.<br>"+
                        "The file will be printed zoomed out so it doesnt matter where the zoom slider is.<br>";
                 } else if (command.equals(aboutCommand)) {
-                    text += "Ufaufaufa";
+text += "<h1>Team Members</h1><ul><li>Sandro Badame</li><li>Anthony DiFiore</li>" +
+        "<li>Christopher Eichel<li><li>Andrew Esca</li> <li>Andres Ramirez" +
+        "</li><li></li></ul><h2>To Learn more about this project follow us at:" +
+        "<a href=\"http://github.com/sbadame/desktopgradeapp/\">http://github.com/sbadame/desktopgradeapp/</a></h2>";
                 }
 
                 text += "</HTML>";
@@ -158,6 +161,7 @@ text+="<h1>Setting the Quality</h1><p>Your first question probably is: \"What" +
                 JFrame helperframe = new JFrame(); // makes a window to put it in
                 helperframe.getContentPane().add(new JScrollPane(textPane)); // adds the text pane to the window
                 helperframe.pack(); // adjusts the window to the right size
+                helperframe.setSize(600, 500);
                 helperframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 helperframe.addWindowListener(new WindowListener(){
                     public void windowClosed(WindowEvent e) {
@@ -175,6 +179,7 @@ text+="<h1>Setting the Quality</h1><p>Your first question probably is: \"What" +
                 frame.setVisible(false); //Hide the help panel
                 helperframe.setVisible(true); // makes it show up
                 helperframe.setLocationRelativeTo(null);
+                textPane.setCaretPosition(0);
                 return;
             }
         });
