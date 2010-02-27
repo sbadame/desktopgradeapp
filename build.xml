@@ -43,9 +43,9 @@
         <jar jarfile="dist/GradeApp.jar">
             <fileset dir="bin/main" />
             <manifest>
-		<attribute name="Implementation-Vendor" value="Desktop Application Group"/>
-		<attribute name="Main-Class" value="gradeapp.GradeApp" />
-		<attribute name="Class-Path" value="lib/jgraph.jar lib/junit-4.6.jar lib/mail.jar lib/poi-3.6-20091214.jar" />
+                <attribute name="Implementation-Vendor" value="Desktop Application Group"/>
+                <attribute name="Main-Class" value="gradeapp.GradeApp" />
+                <attribute name="Class-Path" value="lib/jgraph.jar lib/junit-4.6.jar lib/mail.jar lib/poi-3.6-20091214.jar" />
             </manifest>
         </jar>
         <copy todir="dist">
@@ -85,6 +85,10 @@
                 <path location="bin/main" />
            </classpath>
        </javac>
+       <!-- don't forget our icons!! -->
+       <copy todir="bin/main">
+           <fileset dir="src/main" includes="**/*.png" />
+       </copy>
      </target>
 
     <!-- run junit to test the program -->
