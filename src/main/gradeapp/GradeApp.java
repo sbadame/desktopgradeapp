@@ -120,7 +120,7 @@ public class GradeApp extends javax.swing.JFrame {
         qualitySliderPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Quality - " + (int)(Graph.DEFAULT_QUALITY*100) + "%"));
         qualitySliderPanel.setToolTipText("This bar modifies the quality of the graph. Increasing quality shrinks the graph but gives more definate results, while reducing quality gives more results but they may not be the most telling.");
 
-        qualitySlider.setFont(new java.awt.Font("DejaVu Sans", 0, 8));
+        qualitySlider.setFont(new java.awt.Font("DejaVu Sans", 0, 8)); // NOI18N
         qualitySlider.setMajorTickSpacing(10);
         qualitySlider.setMinorTickSpacing(5);
         qualitySlider.setPaintLabels(true);
@@ -222,7 +222,7 @@ public class GradeApp extends javax.swing.JFrame {
                         .addComponent(printButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(saveButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 675, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 725, Short.MAX_VALUE)
                         .addComponent(helpButton)))
                 .addContainerGap())
         );
