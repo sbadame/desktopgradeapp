@@ -122,6 +122,7 @@ public class GradeApp extends javax.swing.JFrame {
 
         qualitySlider.setFont(new java.awt.Font("DejaVu Sans", 0, 8)); // NOI18N
         qualitySlider.setMajorTickSpacing(10);
+        qualitySlider.setMinimum(1);
         qualitySlider.setMinorTickSpacing(5);
         qualitySlider.setPaintLabels(true);
         qualitySlider.setPaintTicks(true);
