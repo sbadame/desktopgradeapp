@@ -44,8 +44,14 @@ public class ExcelReader{
             for(int i=7; i <= 7+QNum-1; i++){
                 Cell keyCell = KeyRow.getCell(i);
                 char tempKey;
+                int keyCellLength = keyCell.getRichStringCellValue().getString().length();
                 try{
-                    tempKey = Character.toUpperCase(keyCell.getRichStringCellValue().getString().charAt(0));
+                    if(keyCellLength == 1){
+                        tempKey = Character.toUpperCase(keyCell.getRichStringCellValue().getString().charAt(0));
+                    }
+                    else{
+                        throw new GraphFormatException();
+                    }
                 }
                 catch(IllegalStateException ex){
                     throw new GraphFormatException();
@@ -65,12 +71,20 @@ public class ExcelReader{
                     Row studRow = MainSheet.getRow(j);
                     for(int k=7; k<=(7+QNum-1); k++){
                         Cell studCell = studRow.getCell(k);
+                       
+
                         if(studCell == null){
                             studAns.add(' ');
                         }
                         else{
                             try{
-                                tempStudAns = Character.toUpperCase(studCell.getRichStringCellValue().getString().charAt(0));
+                                int studCellLength = studCell.getRichStringCellValue().getString().length();
+                                if(studCellLength == 1){
+                                    tempStudAns = Character.toUpperCase(studCell.getRichStringCellValue().getString().charAt(0));
+                                }
+                                else{
+                                    throw new GraphFormatException();
+                                }
                             }
                             catch(IllegalStateException ex){
                                 throw new GraphFormatException();
