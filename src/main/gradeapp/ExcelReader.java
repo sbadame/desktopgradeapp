@@ -65,7 +65,7 @@ public class ExcelReader{
             }
 
         //Grabs Student Answers from Excel Sheet
-            for(int j=4; j < rowCount-3; j++){
+            for(int j=4; j <= rowCount; j++){
                     Vector<Character> studAns = new Vector<Character>();
                     char tempStudAns;
                     Row studRow = MainSheet.getRow(j);
