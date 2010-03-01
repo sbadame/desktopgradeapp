@@ -3,13 +3,12 @@ package gradeapp;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.String;
 import java.util.Vector;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -20,16 +19,16 @@ public class ExcelReader{
     Vector<Vector<Character>> students = new Vector<Vector<Character>>();
 
     public ExcelReader (File in) throws IOException{
-        HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream(in));
-        HSSFSheet MainSheet = wb.getSheetAt(0);
-        HSSFRow KeyRow    = MainSheet.getRow(3);
-        HSSFCell QNumCell   = KeyRow.getCell(4);
+        Workbook wb = new XSSFWorkbook(new FileInputStream(in));
+        Sheet MainSheet = wb.getSheetAt(0);
+        Row KeyRow    = MainSheet.getRow(3);
+        Cell QNumCell   = KeyRow.getCell(4);
 
         int QNum = new Integer(QNumCell.getRichStringCellValue().getString());
         int rowCount = MainSheet.getPhysicalNumberOfRows();
 
         for(int i=7; i <= 7+QNum-1; i++){
-            HSSFCell keyCell = KeyRow.getCell(i);
+            Cell keyCell = KeyRow.getCell(i);
             char tempKey;
             tempKey = Character.toUpperCase(keyCell.getRichStringCellValue().getString().charAt(0));
             key.add(tempKey);
@@ -38,9 +37,9 @@ public class ExcelReader{
         for(int j=4; j < rowCount-3; j++){
                 Vector<Character> studAns = new Vector<Character>();
                 char tempStudAns;
-                HSSFRow studRow = MainSheet.getRow(j);
+                Row studRow = MainSheet.getRow(j);
                 for(int k=7; k<=(7+QNum-1); k++){
-                    HSSFCell studCell = studRow.getCell(k);
+                    Cell studCell = studRow.getCell(k);
                     if(studCell == null){
                         studAns.add(' ');
                     }

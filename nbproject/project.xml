@@ -98,7 +98,7 @@
         <java-data xmlns="http://www.netbeans.org/ns/freeform-project-java/2">
             <compilation-unit>
                 <package-root>src/main</package-root>
-                <classpath mode="compile">lib/junit-4.6.jar:lib/mail.jar:lib/poi-3.6-20091214.jar:lib/jgraph.jar</classpath>
+                <classpath mode="compile">lib/junit-4.6.jar:lib/mail.jar:lib/poi-3.6-20091214.jar:lib/jgraph.jar:lib/poi-ooxml-3.6-20091214.jar</classpath>
                 <built-to>bin/main</built-to>
                 <source-level>1.5</source-level>
             </compilation-unit>
