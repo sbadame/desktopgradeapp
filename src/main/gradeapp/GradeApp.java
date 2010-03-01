@@ -256,7 +256,11 @@ public class GradeApp extends javax.swing.JFrame {
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadButtonActionPerformed
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter xlsfilter = new FileNameExtensionFilter("XLS Files","xls");
-        fc.setFileFilter(xlsfilter);
+        FileNameExtensionFilter xlsxfilter = new FileNameExtensionFilter("XLSX Files","xlsx");
+        fc.addChoosableFileFilter(xlsxfilter);
+        fc.addChoosableFileFilter(xlsfilter);
+        
+
         if (fc.showOpenDialog(null) != JFileChooser.APPROVE_OPTION)
             return;
         File input = fc.getSelectedFile();
