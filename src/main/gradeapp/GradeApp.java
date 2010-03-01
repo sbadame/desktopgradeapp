@@ -283,7 +283,8 @@ public class GradeApp extends javax.swing.JFrame {
             JOptionPane IOFrame = new JOptionPane();
             JOptionPane.showMessageDialog(IOFrame, "Problems Opening File. Please Check Permissions", "File Error", JOptionPane.ERROR_MESSAGE);
         } catch (GraphFormatException ex) {
-            Logger.getLogger(GradeApp.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane FormatFrame = new JOptionPane();
+            JOptionPane.showMessageDialog(FormatFrame, "Problems with Sheet Data. Please Regenerate File or Load Another.", "File Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_loadButtonActionPerformed
