@@ -21,9 +21,8 @@ public class Graph {
     private static Graph graph;
 
     public static Graph createGraph(File excelFile) throws FileNotFoundException, IOException, GraphFormatException {
-        if (graph == null)
-            graph = new Graph(excelFile);
-        return graph;
+        graph = new Graph(excelFile);
+        return getGraph();
     }
 
     public static Graph getGraph() {
